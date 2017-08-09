@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zza.Data", "Zza.Data\Zza.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMHookupDemo", "MVVMHookupDemo\MVVMHookupDemo.csproj", "{5B8B880B-563D-4C29-BD4E-0CC8C3D044BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZzaDesktop", "ZzaDesktop\ZzaDesktop.csproj", "{A9F13769-15EE-4790-96B3-31A3D174EDDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5B8B880B-563D-4C29-BD4E-0CC8C3D044BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B8B880B-563D-4C29-BD4E-0CC8C3D044BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B8B880B-563D-4C29-BD4E-0CC8C3D044BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9F13769-15EE-4790-96B3-31A3D174EDDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F13769-15EE-4790-96B3-31A3D174EDDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9F13769-15EE-4790-96B3-31A3D174EDDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9F13769-15EE-4790-96B3-31A3D174EDDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
