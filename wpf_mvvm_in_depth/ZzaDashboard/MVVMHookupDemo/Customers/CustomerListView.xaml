@@ -3,17 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:cust="clr-namespace:MVVMHookupDemo.Customers"
+             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei ="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:local="clr-namespace:MVVMHookupDemo"
+             xmlns:cust="clr-namespace:MVVMHookupDemo.Customers"
              xmlns:data="clr-namespace:Zza.Data;assembly=Zza.Data"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <!--local:ViewModelLocator.AutoWireViewModel="True"-->
-    <UserControl.DataContext>
-        <cust:CustomerListViewModel />
-    </UserControl.DataContext>
+             d:DesignHeight="300" d:DesignWidth="300"
+             local:MvvmBehaviours.LoadedMethodName="LoadCustomers">
+    <UserControl.InputBindings>
+        <KeyBinding Key="D"
+                    Modifiers="Control"
+                    Command="{Binding DeleteCommand}" />
+    </UserControl.InputBindings>
     <UserControl.Resources>
-        <!--<DataTemplate x:Key="CustomerTemplate">-->
         <DataTemplate DataType="{x:Type data:Customer}">
             <StackPanel>
                 <TextBlock Text="{Binding FirstName}" />
@@ -22,17 +25,37 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
+    <!--<i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="LoadCustomers" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>-->
+
     <Grid>
-        <!--<DataGrid ItemsSource="{Binding Customers}" />-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
+        <Button Content="Delete"
+                Command="{Binding DeleteCommand}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="75" />
+        <Button Content="Change Customer"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="100"
+                Margin="80,0,0,0"
+                Click="OnChangeCustomer" />
+
         <DataGrid x:Name="customerDataGrid"
                   AutoGenerateColumns="False"
                   EnableRowVirtualization="True"
                   ItemsSource="{Binding Customers}"
-                  RowDetailsVisibilityMode="VisibleWhenSelected">
+                  SelectedItem="{Binding SelectedCustomer}"
+                  RowDetailsVisibilityMode="VisibleWhenSelected"
+                  Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="firstNameColumn"
                                     Binding="{Binding FirstName}"
@@ -48,7 +71,6 @@
                                     Width="SizeToHeader" />
             </DataGrid.Columns>
         </DataGrid>
-        <!--<ListBox Grid.Row="1" ItemsSource="{Binding Customers}" ItemTemplate="{StaticResource CustomerTemplate}" />-->
-        <ListBox Grid.Row="1" ItemsSource="{Binding Customers}" />
+        <ListBox Grid.Row="2" ItemsSource="{Binding Customers}" />
     </Grid>
 </UserControl>
