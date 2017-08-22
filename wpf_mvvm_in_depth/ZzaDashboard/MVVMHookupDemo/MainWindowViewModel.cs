@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
-using System.Threading.Tasks;
 using System.Timers;
 using MVVMHookupDemo.Customers;
 
@@ -12,6 +7,8 @@ namespace MVVMHookupDemo
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        private string _notificationMessage;
+
         private Timer _timer = new Timer(5000);
 
         public MainWindowViewModel()
@@ -20,11 +17,9 @@ namespace MVVMHookupDemo
             _timer.Start();
         }
 
-        public object CurrentViewModel { get; set; } = new CustomerListViewModel();
-
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string _notificationMessage;
+        public object CurrentViewModel { get; set; } = new CustomerListViewModel();
 
         public string NotificationMessage
         {

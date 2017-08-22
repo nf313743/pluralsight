@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Practices.Unity;
 using Zza.Data;
 using ZzaDesktop.Customers;
 using ZzaDesktop.OrderPrep;
@@ -8,32 +9,25 @@ namespace ZzaDesktop
 {
     internal class MainWindowViewModel : BindableBase
     {
+        private AddEditCustomerViewModel _addEditViewModel;
+
         private BindableBase _currentViewModel;
-        private CustomerListViewModel _customerListViewModel = new CustomerListViewModel();
+
+        private CustomerListViewModel _customerListViewModel;
+
         private OrderPrepViewModel _orderPrepViewModel = new OrderPrepViewModel();
+
         private OrderViewModel _orderViewModel = new OrderViewModel();
-        private AddEditCustomerViewModel _addEditViewModel = new AddEditCustomerViewModel();
 
         public MainWindowViewModel()
         {
             NavCommand = new RelayCommand<string>(OnNav);
+            _customerListViewModel = ContainerHelper.Container.Resolve<CustomerListViewModel>();
+            _addEditViewModel = ContainerHelper.Container.Resolve<AddEditCustomerViewModel>();
             _customerListViewModel.PlaceOrderRequested += NavToOrder;
             _customerListViewModel.AddCustomerRequested += NavToAddCustomer;
             _customerListViewModel.EditCustomerRequested += NavToEditCustomer;
-        }
-
-        private void NavToEditCustomer(object sender, Customer cust)
-        {
-            _addEditViewModel.EditMode = false;
-            _addEditViewModel.SetCustomer(cust);
-            CurrentViewModel = _addEditViewModel;
-        }
-
-        private void NavToAddCustomer(object sender, Customer cust)
-        {
-            _addEditViewModel.EditMode = true;
-            _addEditViewModel.SetCustomer(cust);
-            CurrentViewModel = _addEditViewModel;
+            _addEditViewModel.Done += NavToCustomerList;
         }
 
         public BindableBase CurrentViewModel
@@ -50,6 +44,25 @@ namespace ZzaDesktop
         }
 
         public RelayCommand<string> NavCommand { get; private set; }
+
+        private void NavToAddCustomer(object sender, Customer cust)
+        {
+            _addEditViewModel.EditMode = false;
+            _addEditViewModel.SetCustomer(cust);
+            CurrentViewModel = _addEditViewModel;
+        }
+
+        private void NavToCustomerList(object sender, EventArgs e)
+        {
+            CurrentViewModel = _customerListViewModel;
+        }
+
+        private void NavToEditCustomer(object sender, Customer cust)
+        {
+            _addEditViewModel.EditMode = true;
+            _addEditViewModel.SetCustomer(cust);
+            CurrentViewModel = _addEditViewModel;
+        }
 
         private void NavToOrder(object sender, Guid customerId)
         {

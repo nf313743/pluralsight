@@ -9,11 +9,23 @@ namespace ZzaDashboard.Services
 {
     public class CustomersRepository : ICustomersRepository
     {
-        ZzaDbContext _context = new ZzaDbContext();
+        private ZzaDbContext _context = new ZzaDbContext();
 
-        public Task<List<Customer>> GetCustomersAsync()
+        public async Task<Customer> AddCustomerAsync(Customer customer)
         {
-            return _context.Customers.ToListAsync();
+            _context.Customers.Add(customer);
+            await _context.SaveChangesAsync();
+            return customer;
+        }
+
+        public async Task DeleteCustomerAsync(Guid customerId)
+        {
+            var customer = _context.Customers.FirstOrDefault(c => c.Id == customerId);
+            if (customer != null)
+            {
+                _context.Customers.Remove(customer);
+            }
+            await _context.SaveChangesAsync();
         }
 
         public Task<Customer> GetCustomerAsync(Guid id)
@@ -21,11 +33,9 @@ namespace ZzaDashboard.Services
             return _context.Customers.FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<Customer> AddCustomerAsync(Customer customer)
+        public Task<List<Customer>> GetCustomersAsync()
         {
-            _context.Customers.Add(customer);
-            await _context.SaveChangesAsync();
-            return customer;
+            return _context.Customers.ToListAsync();
         }
 
         public async Task<Customer> UpdateCustomerAsync(Customer customer)
@@ -37,17 +47,6 @@ namespace ZzaDashboard.Services
             _context.Entry(customer).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return customer;
-
-        }
-
-        public async Task DeleteCustomerAsync(Guid customerId)
-        {
-            var customer = _context.Customers.FirstOrDefault(c => c.Id == customerId);
-            if (customer != null)
-            {
-                _context.Customers.Remove(customer);
-            }
-            await _context.SaveChangesAsync();
         }
     }
 }

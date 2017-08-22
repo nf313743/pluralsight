@@ -76,6 +76,5 @@
                         Click="OnSave" />
             </StackPanel>
         </Grid>
-
     </Grid>
 </UserControl>

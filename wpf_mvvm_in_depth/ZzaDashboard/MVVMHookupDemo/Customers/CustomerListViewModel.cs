@@ -8,9 +8,11 @@ namespace MVVMHookupDemo.Customers
 {
     public class CustomerListViewModel : INotifyPropertyChanged
     {
-        private ICustomersRepository _repo;
-        private Customer _selectedCustomer;
         private ObservableCollection<Customer> _customers;
+
+        private ICustomersRepository _repo;
+
+        private Customer _selectedCustomer;
 
         public CustomerListViewModel()
         {
