@@ -1,4 +1,5 @@
 ﻿using OdeToFood.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,19 @@ namespace OdeToFood.Controllers
     public class HomeController : Controller
     {
         private OdeToFoodDb _db = new OdeToFoodDb();
+
+        public ActionResult AutoComplete(string term)
+        {
+            var model = _db.Restaurants
+                .Where(x => x.Name.StartsWith(term))
+                .Take(10)
+                .Select(x => new
+                {
+                    label = x.Name
+                });
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult About()
         {
@@ -27,20 +41,25 @@ namespace OdeToFood.Controllers
             return View();
         }
 
-        public ActionResult Index(string searchTerm = null)
+        public ActionResult Index(string searchTerm = null, int page = 1)
         {
             var model = _db.Restaurants
                 .Where(x => searchTerm == null || x.Name.StartsWith(searchTerm))
                 .OrderByDescending(x => x.Reviews.Average(y => y.Rating))
                 .Select(x => new RestaurantListViewModel
-                                {
-                                    Id = x.Id,
-                                    Name = x.Name,
-                                    City = x.City,
-                                    Country = x.Country,
-                                    CountOfReviews = x.Reviews.Count
-                                }
-                );
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    City = x.City,
+                    Country = x.Country,
+                    CountOfReviews = x.Reviews.Count
+                }
+                ).ToPagedList(page, 10);
+
+            if(Request.IsAjaxRequest())
+            {
+                return PartialView("_Restaurants", model);
+            }
 
             return View(model);
         }
