@@ -42,6 +42,7 @@ namespace OdeToFood.Controllers
             return View();
         }
 
+        [OutputCache(Duration = 360, VaryByHeader = "X-Requested-With;Accept-Language", Location = System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Index(string searchTerm = null, int page = 1)
         {
             var model = _db.Restaurants
