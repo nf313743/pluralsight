@@ -25,6 +25,7 @@ namespace OdeToFood.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
         public ActionResult About()
         {
             var model = new AboutModel();
@@ -56,7 +57,7 @@ namespace OdeToFood.Controllers
                 }
                 ).ToPagedList(page, 10);
 
-            if(Request.IsAjaxRequest())
+            if (Request.IsAjaxRequest())
             {
                 return PartialView("_Restaurants", model);
             }

@@ -6,9 +6,10 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
-
+    @Html.AntiForgeryToken()
     <fieldset>
         <legend>Restaurant</legend>
 
@@ -47,5 +48,5 @@
 </div>
 
 @section Scripts {
-   
+
 }

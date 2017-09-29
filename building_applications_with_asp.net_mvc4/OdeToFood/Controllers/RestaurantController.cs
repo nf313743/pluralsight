@@ -11,7 +11,7 @@ namespace OdeToFood.Controllers
 {
     public class RestaurantController : Controller
     {
-        private OdeToFoodDb db = new OdeToFoodDb ();
+        private OdeToFoodDb db = new OdeToFoodDb();
 
         //
         // GET: /Restaurant/
@@ -21,9 +21,9 @@ namespace OdeToFood.Controllers
             return View(db.Restaurants.ToList());
         }
 
-          //
+        //
         // GET: /Restaurant/Create
-
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
@@ -33,6 +33,8 @@ namespace OdeToFood.Controllers
         // POST: /Restaurant/Create
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Restaurant restaurant)
         {
             if (ModelState.IsValid)

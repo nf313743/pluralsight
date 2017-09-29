@@ -10,10 +10,10 @@ namespace OdeToFood.Models
     {
         public OdeToFoodDb() : base("name=DefaultConnection")
         {
-
         }
 
         public DbSet<RestaurantReview> RestaurantReviews { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
     }
 }
