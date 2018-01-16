@@ -65,6 +65,9 @@ var ProductListComponent = /** @class */ (function () {
     ProductListComponent.prototype.toggleImage = function () {
         this.showImage = !this.showImage;
     };
+    ProductListComponent.prototype.onRatingClicked = function (message) {
+        this.pageTitle = 'Product List: ' + message;
+    };
     ProductListComponent = __decorate([
         core_1.Component({
             selector: 'pm-products',

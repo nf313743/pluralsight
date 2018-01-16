@@ -12,13 +12,14 @@ var forms_1 = require("@angular/forms");
 var app_component_1 = require("./app.component");
 var product_list_component_1 = require("./products/product-list.component");
 var convert_to_spaces_pipe_1 = require("./shared/convert-to-spaces-pipe");
+var star_component_1 = require("./shared/star.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule],
-            declarations: [app_component_1.AppComponent, product_list_component_1.ProductListComponent, convert_to_spaces_pipe_1.ConverToSpacesPipe],
+            declarations: [app_component_1.AppComponent, product_list_component_1.ProductListComponent, convert_to_spaces_pipe_1.ConverToSpacesPipe, star_component_1.StarComponent],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
