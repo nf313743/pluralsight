@@ -23,7 +23,7 @@ var ProductListComponent = /** @class */ (function () {
                 "description": "Curved claw steel hammer",
                 "price": 8.9,
                 "starRating": 4.8,
-                "imageUrl": "http://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png"
+                "imageUrl": "/api/products/images/rejon_Hammer.png"
             },
             {
                 "productId": 8,
@@ -33,7 +33,7 @@ var ProductListComponent = /** @class */ (function () {
                 "description": "15-inch steel blade hand saw",
                 "price": 11.55,
                 "starRating": 3.7,
-                "imageUrl": "http://openclipart.org/image/300px/svg_to_png/27070/egore911_saw.png"
+                "imageUrl": "/api/products/images/egore911_saw.png"
             }
         ];
     }
