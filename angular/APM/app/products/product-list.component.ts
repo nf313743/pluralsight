@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from './product';
+import { ProductService } from './product.service';
 
 @Component({
     selector: 'pm-products',
@@ -12,34 +13,11 @@ export class ProductListComponent implements OnInit {
     imageWidth: number = 50;
     imageMargin: number = 2;
     showImage: boolean = false;
-    _listFilter: string = 'cart';
+    _listFilter: string;
     filteredProducts: IProduct[];
-    products: IProduct[] = [
-        {
-            "productId": 5,
-            "productName": "Hammer",
-            "productCode": "TBX-0048",
-            "releaseDate": "May 21, 2016",
-            "description": "Curved claw steel hammer",
-            "price": 8.9,
-            "starRating": 4.8,
-            "imageUrl": "/api/products/images/rejon_Hammer.png"
-        },
-        {
-            "productId": 8,
-            "productName": "Saw",
-            "productCode": "TBX-0022",
-            "releaseDate": "May 15, 2016",
-            "description": "15-inch steel blade hand saw",
-            "price": 11.55,
-            "starRating": 3.7,
-            "imageUrl": "/api/products/images/egore911_saw.png"
-        }
-    ];
+    products: IProduct[] = [];
 
-    constructor() {
-        this.filteredProducts = this.products;
-        this.listFilter = 'cart';
+    constructor(private _productService: ProductService) {
     }
 
     get listFilter(): string {
@@ -58,7 +36,8 @@ export class ProductListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log('In OnInit');
+        this.products = this._productService.getProducts();
+        this.filteredProducts =  this.products;
     }
 
     toggleImage(): void {

@@ -10,37 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var product_service_1 = require("./product.service");
 var ProductListComponent = /** @class */ (function () {
-    function ProductListComponent() {
+    function ProductListComponent(_productService) {
+        this._productService = _productService;
         this.pageTitle = 'Product List';
         this.imageWidth = 50;
         this.imageMargin = 2;
         this.showImage = false;
-        this._listFilter = 'cart';
-        this.products = [
-            {
-                "productId": 5,
-                "productName": "Hammer",
-                "productCode": "TBX-0048",
-                "releaseDate": "May 21, 2016",
-                "description": "Curved claw steel hammer",
-                "price": 8.9,
-                "starRating": 4.8,
-                "imageUrl": "/api/products/images/rejon_Hammer.png"
-            },
-            {
-                "productId": 8,
-                "productName": "Saw",
-                "productCode": "TBX-0022",
-                "releaseDate": "May 15, 2016",
-                "description": "15-inch steel blade hand saw",
-                "price": 11.55,
-                "starRating": 3.7,
-                "imageUrl": "/api/products/images/egore911_saw.png"
-            }
-        ];
-        this.filteredProducts = this.products;
-        this.listFilter = 'cart';
+        this.products = [];
     }
     Object.defineProperty(ProductListComponent.prototype, "listFilter", {
         get: function () {
@@ -60,7 +38,8 @@ var ProductListComponent = /** @class */ (function () {
         });
     };
     ProductListComponent.prototype.ngOnInit = function () {
-        console.log('In OnInit');
+        this.products = this._productService.getProducts();
+        this.filteredProducts = this.products;
     };
     ProductListComponent.prototype.toggleImage = function () {
         this.showImage = !this.showImage;
@@ -74,7 +53,7 @@ var ProductListComponent = /** @class */ (function () {
             templateUrl: 'app/products/product-list.component.html',
             styleUrls: ['app/products/product-list.component.css']
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [product_service_1.ProductService])
     ], ProductListComponent);
     return ProductListComponent;
 }());
