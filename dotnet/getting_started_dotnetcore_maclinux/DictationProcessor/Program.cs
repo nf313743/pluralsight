@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Threading.Tasks;
 
 namespace DictationProcessor
 {
@@ -11,13 +12,14 @@ namespace DictationProcessor
     {
         static void Main(string[] args)
         {
-            foreach (var subFolder in Directory.GetDirectories("../uploads"))
+            Parallel.ForEach(
+                Directory.GetDirectories("../uploads"), 
+                subFolder => 
             {
                 var metadataFilePath = Path.Combine(subFolder, "metadata.json");
                 Console.WriteLine($"Reading {metadataFilePath}");
 
                 var metadataCollection = GetMetadata(metadataFilePath);
-
 
                 foreach (var metadata in metadataCollection)
                 {
@@ -34,7 +36,7 @@ namespace DictationProcessor
                     CreateCompressedFile(audioFilePath, newPath);
                     SaveSingleMetadata(metadata, newPath + ".json");
                 }
-            }
+            });
         }
 
         static void CreateCompressedFile(string inputFilePath, string outputFilePath)

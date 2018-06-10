@@ -3,7 +3,7 @@
         "DateRecorded": "2017-03-05T04:24:15Z",
         "File": {
             "FileName": "01.WAV",
-            "Md5Checksum": "bdb3bf00145c11ea1f6cf3164f832844"
+            "Md5Checksum": "039cbdb51836973efce2146e38ef084e"
         },
         "Patient": "Treemont H. Reed",
         "Practitioner": "Dr. Frank Greene",
@@ -16,7 +16,7 @@
         "DateRecorded": "2017-03-05T17:33:12Z",
         "File": {
             "FileName": "02.WAV",
-            "Md5Checksum": "ffd3528c850c592b085084a23597e718"
+            "Md5Checksum": "f270b77b246ee3ef0ca1ccaa75cdaa98"
         },
         "Patient": "Samson Hornmather",
         "Practitioner": "Dr. Hank Hellner",
@@ -28,7 +28,7 @@
         "DateRecorded": "2017-03-05T01:28:51Z",
         "File": {
             "FileName": "03.WAV",
-            "Md5Checksum": "98094fc8dbc510a447a3d5f2a0c8a8b1"
+            "Md5Checksum": "ead9b6b7194bf90c1ef0d31bcd0b1e50"
         },
         "Patient": "Pamela Yung",
         "Practitioner": "Dr. Grant Ostenheimer",
