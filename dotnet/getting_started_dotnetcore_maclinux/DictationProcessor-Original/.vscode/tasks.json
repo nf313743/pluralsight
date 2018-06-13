@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/DictationProcessorApp/DictationProcessorApp.csproj"
+                "${workspaceFolder}/DictationProcessor.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
