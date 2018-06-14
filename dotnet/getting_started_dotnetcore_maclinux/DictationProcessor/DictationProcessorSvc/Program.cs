@@ -14,7 +14,7 @@ namespace DictationProcessorSvc
             fileSystemWatcher.IncludeSubdirectories = true;
             while(true)
             {
-                Console.WriteLine("Waiting...");
+                Console.WriteLine("Waiting..."); 
                 var result = fileSystemWatcher.WaitForChanged(WatcherChangeTypes.Created);
                 Console.WriteLine($"New metadata file {result.Name}");
                 var fullMetadataFilePath = Path.Combine(uploadPath, result.Name);
