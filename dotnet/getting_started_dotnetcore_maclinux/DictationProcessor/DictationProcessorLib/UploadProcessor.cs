@@ -17,9 +17,9 @@ namespace DictationProcessorLib
         {
             _subFolder = subFolder;
         }
+
         public void Process()
         {
-
             var metadataFilePath = Path.Combine(_subFolder, "metadata.json");
             Console.WriteLine($"Reading {metadataFilePath}");
 
@@ -36,7 +36,7 @@ namespace DictationProcessorLib
                 }
                 var uniqueId = Guid.NewGuid();
                 metadata.File.FileName = uniqueId + ".WAV";
-                var newPath = Path.Combine("../ready_for_transcription", uniqueId + ".WAV");
+                var newPath = Path.Combine("../../ready_for_transcription", uniqueId + ".WAV");
                 CreateCompressedFile(audioFilePath, newPath);
                 SaveSingleMetadata(metadata, newPath + ".json");
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using DictationProcessorLib;
 
 namespace DictationProcessorApp
 {
@@ -9,9 +10,11 @@ namespace DictationProcessorApp
         static void Main(string[] args)
         {
              Parallel.ForEach(
-                Directory.GetDirectories("../uploads"),
+                Directory.GetDirectories("../../uploads"),
                 subFolder =>
             {
+                var uploadProcessor = new UploadProcessor(subFolder);
+                uploadProcessor.Process();
             });
         }
     }
