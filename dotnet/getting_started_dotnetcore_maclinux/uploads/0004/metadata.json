@@ -1,0 +1,12 @@
+[
+    {
+        "DateRecorded": "2017-03-05T11:03:11Z",
+        "File": {
+            "FileName": "01.WAV",
+            "Md5Checksum": "aa3a7e2431e7a788fe17428b9bc594e6"
+        },
+        "Patient": "Ying Xi",
+        "Practitioner": "Dr. Leon Griegon",
+        "Tags": []
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "DateRecorded": "2017-03-05T04:24:15Z",
+        "File": {
+            "FileName": "01.WAV",
+            "Md5Checksum": "039cbdb51836973efce2146e38ef084e"
+        },
+        "Patient": "Treemont H. Reed",
+        "Practitioner": "Dr. Frank Greene",
+        "Tags": [
+            "very urgent",
+            "injury"
+        ]
+    },
+    {
+        "DateRecorded": "2017-03-05T17:33:12Z",
+        "File": {
+            "FileName": "02.WAV",
+            "Md5Checksum": "f270b77b246ee3ef0ca1ccaa75cdaa98"
+        },
+        "Patient": "Samson Hornmather",
+        "Practitioner": "Dr. Hank Hellner",
+        "Tags": [
+            "checkup"
+        ]
+    },
+    {
+        "DateRecorded": "2017-03-05T01:28:51Z",
+        "File": {
+            "FileName": "03.WAV",
+            "Md5Checksum": "ead9b6b7194bf90c1ef0d31bcd0b1e50"
+        },
+        "Patient": "Pamela Yung",
+        "Practitioner": "Dr. Grant Ostenheimer",
+        "Tags": []
+    }
+]

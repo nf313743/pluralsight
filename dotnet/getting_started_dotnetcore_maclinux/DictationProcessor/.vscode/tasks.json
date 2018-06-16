@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "options": {
+        "cwd": "${fileDirname}"
+    },
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

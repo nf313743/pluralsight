@@ -1,0 +1,14 @@
+[
+    {
+        "DateRecorded": "2017-03-05T21:03:42Z",
+        "File": {
+            "FileName": "01.WAV",
+            "Md5Checksum": "70715ea0018b98d647a5f042a2cacddb"
+        },
+        "Patient": "Angston Lacksley",
+        "Practitioner": "Dr. Kingston Loyola",
+        "Tags": [
+            "checkup"
+        ]
+    }
+]
