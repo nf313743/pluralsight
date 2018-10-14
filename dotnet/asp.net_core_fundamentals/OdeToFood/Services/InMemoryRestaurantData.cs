@@ -6,11 +6,11 @@ namespace OdeToFood.Services
 {
     public class InMemoryRestaurantData : IRestaurantData
     {
-        List<Restaurant> _restaurant;
+        List<Restaurant> _restaurants;
 
         public InMemoryRestaurantData()
         {
-            _restaurant = new List<Restaurant>
+            _restaurants = new List<Restaurant>
             {
                 new Restaurant{Id = 1, Name = "Scott's Pizza Palace"},
                 new Restaurant{Id=2, Name="Tersiguels"},
@@ -18,9 +18,16 @@ namespace OdeToFood.Services
             };
         }
 
-        public Restaurant Get(int id) => _restaurant.FirstOrDefault(x => x.Id == id);
+        public Restaurant Add(Restaurant restaurant)
+        {
+            restaurant.Id = _restaurants.Max(x => x.Id) + 1;
+            _restaurants.Add(restaurant);
+            return restaurant;
+        }
+
+        public Restaurant Get(int id) => _restaurants.FirstOrDefault(x => x.Id == id);
 
         public IEnumerable<Restaurant> GetAll()
-            => _restaurant.OrderBy(x => x.Name);
+            => _restaurants.OrderBy(x => x.Name);
     }
 }
