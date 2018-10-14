@@ -1,12 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using OdeToFood.Models;
 
-namespace OdeToFood.Models
+namespace OdeToFood.ViewModels
 {
-    public class Restaurant
+    public class RestaurantEditViewModel
     {
-        public int Id { get; set; }
-
-        [Display(Name="Restaurant Name")]
         [Required]
         [MaxLength(80)]
         public string Name { get; set; }
