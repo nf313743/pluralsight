@@ -29,5 +29,10 @@ namespace OdeToFood.Services
 
         public IEnumerable<Restaurant> GetAll()
             => _restaurants.OrderBy(x => x.Name);
+
+        public Restaurant Update(Restaurant restaurant)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
