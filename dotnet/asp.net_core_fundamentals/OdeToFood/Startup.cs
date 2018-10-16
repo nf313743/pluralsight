@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +30,17 @@ namespace OdeToFood
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(x =>
+            {
+                x.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
+            .AddOpenIdConnect(x =>
+            {
+                _configuration.Bind("AzureAd", x);
+            })
+            .AddCookie();
+
             services.AddSingleton<IGreeter, Greeter>();
             services.AddDbContext<OdeToFoodDbContext>(
                 x => x.UseSqlite(_configuration.GetConnectionString("OdeToFood")));
@@ -36,7 +50,7 @@ namespace OdeToFood
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
-            IApplicationBuilder app, 
+            IApplicationBuilder app,
             IHostingEnvironment env,
             IGreeter greeter,
             ILogger<Startup> logger)
@@ -47,7 +61,11 @@ namespace OdeToFood
                 logger.LogInformation("In Developer mode");
             }
 
+            //app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
+
             app.UseMvc(ConfigureRoutes);
 
             app.Run(async (context) =>
