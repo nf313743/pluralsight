@@ -7,7 +7,7 @@ using OdeToFood.ViewModels;
 namespace OdeToFood.Controllers
 {
 
-    [Authorize]    
+    // [Authorize]  Problem with proxy server  
     public class HomeController : Controller
     {
         private IRestaurantData _restaurantData;
