@@ -19,14 +19,14 @@ namespace CityInfo.API
                 {
                     Name = "New York City",
                     Description = "The one with the big park.",
-                    PointsOfInterest = new List<PointsOfInterest>
+                    PointsOfInterest = new List<PointOfInterest>
                     {
-                        new PointsOfInterest
+                        new PointOfInterest
                         {
                             Name = "Central Park",
                             Description="The most visited urban park in the US."
                         },
-                        new PointsOfInterest
+                        new PointOfInterest
                         {
                             Name = "Empire State Building",
                             Description="A 102-story skyscrapper located in Midtown Manhattan."
@@ -37,14 +37,14 @@ namespace CityInfo.API
                 {
                     Name = "Antwerp",
                     Description = "The one with the cathedral that was never finished.",
-                    PointsOfInterest = new List<PointsOfInterest>
+                    PointsOfInterest = new List<PointOfInterest>
                     {
-                        new PointsOfInterest
+                        new PointOfInterest
                         {
                             Name = "Cathedral of Our Lady",
                             Description="A gothic style cathedral"
                         },
-                        new PointsOfInterest
+                        new PointOfInterest
                         {
                             Name = "Antwerp Central Station",
                             Description="First train in Belgium"
@@ -55,14 +55,14 @@ namespace CityInfo.API
                 {
                     Name= "Paris",
                     Description = "The one with that big tower.",
-                    PointsOfInterest = new List<PointsOfInterest>
+                    PointsOfInterest = new List<PointOfInterest>
                     {
-                        new PointsOfInterest
+                        new PointOfInterest
                         {
                             Name = "Eiffel Tower",
                             Description="Iron lattice tower"
                         },
-                        new PointsOfInterest
+                        new PointOfInterest
                         {
                             Name = "The Louvre",
                             Description="The world's largest museum."

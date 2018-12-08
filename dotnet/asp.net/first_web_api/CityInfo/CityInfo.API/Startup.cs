@@ -45,6 +45,7 @@ namespace CityInfo.API
             services.AddScoped<IMailService, LocalMailService>();
             services.AddDbContext<CityInfoContext>(
                 x => x.UseSqlite(Configuration.GetConnectionString("cityInfoDBConnectionString")));
+            services.AddScoped<ICityInfoRepository, CityInfoRepository>();
 
 
         }
@@ -67,6 +68,17 @@ namespace CityInfo.API
             context.EnsureSeedDataForContext();
 
             app.UseStatusCodePages();
+
+            AutoMapper.Mapper.Initialize(x => 
+            {
+                x.CreateMap<Entities.City, Models.CityWithoutPointsOfInterestDto>();
+                x.CreateMap<Entities.City, Models.CityDto>();
+                x.CreateMap<Entities.PointOfInterest, Models.PointsOfInterestDto>();
+                x.CreateMap<Models.PointsOfInterestForCreationDto, Entities.PointOfInterest>();
+                x.CreateMap<Models.PointsOfInterestForUpdateDto, Entities.PointOfInterest>();
+                x.CreateMap<Entities.PointOfInterest, Models.PointsOfInterestForUpdateDto>();
+            });
+
             app.UseMvc();
 
             // app.Run(async (context) =>

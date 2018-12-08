@@ -12,7 +12,7 @@ namespace CityInfo.API.Entities
         }
 
         public DbSet<City> Cities {get;set;}
-        public DbSet<PointsOfInterest> PointsOfInterest {get;set;}
+        public DbSet<PointOfInterest> PointsOfInterest {get;set;}
 
     }
 }
