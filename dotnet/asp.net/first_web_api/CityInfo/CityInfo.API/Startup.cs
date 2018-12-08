@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CityInfo.API.Entities;
 using CityInfo.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -41,6 +43,9 @@ namespace CityInfo.API
                         x => x.OutputFormatters.Add(
                             new XmlDataContractSerializerOutputFormatter()));
             services.AddScoped<IMailService, LocalMailService>();
+            services.AddDbContext<CityInfoContext>(
+                x => x.UseSqlite(Configuration.GetConnectionString("cityInfoDBConnectionString")));
+
 
         }
 
@@ -48,7 +53,8 @@ namespace CityInfo.API
         public void Configure(
             IApplicationBuilder app,
             IHostingEnvironment env,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            CityInfoContext context)
         {
             loggerFactory.AddConsole();
             loggerFactory.AddDebug();
@@ -57,6 +63,8 @@ namespace CityInfo.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            context.EnsureSeedDataForContext();
 
             app.UseStatusCodePages();
             app.UseMvc();
