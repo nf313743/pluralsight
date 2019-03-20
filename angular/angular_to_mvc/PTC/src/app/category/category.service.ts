@@ -1,30 +1,25 @@
 ﻿import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs/Observable";
-import { Product } from "./product";
-import { ProductSearch } from './productSearch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-//import { defaultCipherList } from "constants";
+
+import { Category } from './category';
 
 @Injectable()
-export class ProductService {
-    private url = '/api/productApi';
+export class CategoryService {
+    private url = '/api/categoryApi';
 
-    constructor(private http: Http) { }
+    constructor(private http: Http) {
 
-    getProducts(): Observable<Product[]> {
-        return this.http.get(this.url)
-            .map(this.extractData)
-            .catch(this.handleErrors);
     }
 
-    search(searchEntity: ProductSearch): Observable<Product[]> {
+    getSearchCategories(): Observable<Category[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.url + '/search', searchEntity, options)
+        return this.http.post(this.url + '/SearchCategories', null, options)
             .map(this.extractData)
             .catch(this.handleErrors);
     }
@@ -48,7 +43,7 @@ export class ProductService {
                 }
                 break;
             case 404:
-                errors.push('No product date is available.');
+                errors.push('No category date is available.');
                 break;
             case 500:
                 errors.push(error.json().exceptionMessage);

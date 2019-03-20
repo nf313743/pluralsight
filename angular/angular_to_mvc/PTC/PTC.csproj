@@ -164,6 +164,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Components\PDSAPageModeEnum.cs" />
     <Compile Include="Components\ProductSearch.cs" />
+    <Compile Include="Controllers\CategoryApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductApiController.cs" />
@@ -234,9 +235,12 @@
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
     <Content Include="src\app\product\product-list.component.html" />
+    <TypeScriptCompile Include="src\app\category\category.service.ts" />
+    <TypeScriptCompile Include="src\app\category\category.ts" />
     <TypeScriptCompile Include="src\app\product\product-list.component.ts" />
     <TypeScriptCompile Include="src\app\product\product.service.ts" />
     <TypeScriptCompile Include="src\app\product\product.ts" />
+    <TypeScriptCompile Include="src\app\product\productSearch.ts" />
     <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>
   <ItemGroup>

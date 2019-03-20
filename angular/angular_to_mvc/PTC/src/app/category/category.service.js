@@ -15,29 +15,23 @@ var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/observable/throw");
-//import { defaultCipherList } from "constants";
-var ProductService = /** @class */ (function () {
-    function ProductService(http) {
+var CategoryService = /** @class */ (function () {
+    function CategoryService(http) {
         this.http = http;
-        this.url = '/api/productApi';
+        this.url = '/api/categoryApi';
     }
-    ProductService.prototype.getProducts = function () {
-        return this.http.get(this.url)
-            .map(this.extractData)
-            .catch(this.handleErrors);
-    };
-    ProductService.prototype.search = function (searchEntity) {
+    CategoryService.prototype.getSearchCategories = function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.url + '/search', searchEntity, options)
+        return this.http.post(this.url + '/SearchCategories', null, options)
             .map(this.extractData)
             .catch(this.handleErrors);
     };
-    ProductService.prototype.extractData = function (res) {
+    CategoryService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};
     };
-    ProductService.prototype.handleErrors = function (error) {
+    CategoryService.prototype.handleErrors = function (error) {
         var errors = [];
         switch (error.status) {
             case 400:
@@ -50,7 +44,7 @@ var ProductService = /** @class */ (function () {
                 }
                 break;
             case 404:
-                errors.push('No product date is available.');
+                errors.push('No category date is available.');
                 break;
             case 500:
                 errors.push(error.json().exceptionMessage);
@@ -62,11 +56,11 @@ var ProductService = /** @class */ (function () {
         console.error('An error occuerred', errors);
         return Observable_1.Observable.throw(errors);
     };
-    ProductService = __decorate([
+    CategoryService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.Http])
-    ], ProductService);
-    return ProductService;
+    ], CategoryService);
+    return CategoryService;
 }());
-exports.ProductService = ProductService;
-//# sourceMappingURL=product.service.js.map
+exports.CategoryService = CategoryService;
+//# sourceMappingURL=category.service.js.map

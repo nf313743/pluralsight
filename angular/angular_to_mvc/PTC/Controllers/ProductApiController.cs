@@ -2,6 +2,7 @@
 
 namespace PTC.Controllers
 {
+    [RoutePrefix("api/productApi")]
     public class ProductApiController : ApiController
     {
         public IHttpActionResult Get()
@@ -25,6 +26,23 @@ namespace PTC.Controllers
             }
 
             return ret;
+        }
+
+        [Route("Search")]
+        [HttpPost]
+        public IHttpActionResult Search([FromBody]ProductSearch search)
+        {
+            var vm = new PTCViewModel();
+            vm.SearchEntity = search;
+            vm.Search();
+            if(vm.LastException != null)
+            {
+                return BadRequest(vm.Message);
+            }
+            else
+            {
+                return Ok(vm.Products);
+            }
         }
     }
 }
