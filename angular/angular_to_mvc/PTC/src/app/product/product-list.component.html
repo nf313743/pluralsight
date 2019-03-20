@@ -1,1 +1,36 @@
 ﻿<h2>Product List</h2>
+
+<div class="row" *ngIf="products && products.length">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <td>Product Name</td>
+                        <td>Introduction Date</td>
+                        <td>URL</td>
+                        <td class="text-right">Price</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <td>{{product.productName}}</td>
+                        <td>{{product.introductionDate | date}}</td>
+                        <td>{{product.url}}</td>
+                        <td class=" text-right">{{product.price | currency:'USD':true}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="messages && messages.length">
+    <div class="col-xs-12">
+        <div class="alert alert-warning">
+            <ul>
+                <li *ngFor="let msg of messages">{{msg}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
