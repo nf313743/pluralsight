@@ -58,18 +58,32 @@
             <table class="table table-bordered table-condensed table-striped">
                 <thead>
                     <tr>
+                        <td>Edit</td>
                         <td>Product Name</td>
                         <td>Introduction Date</td>
                         <td>URL</td>
                         <td class="text-right">Price</td>
+                        <td>Delete</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let product of products">
+                        <td>
+                            <button class="btn btn-default btn-sm"
+                                    (click)="selectProduct(product.productId)">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </button>
+                        </td>
                         <td>{{product.productName}}</td>
                         <td>{{product.introductionDate | date}}</td>
                         <td>{{product.url}}</td>
                         <td class=" text-right">{{product.price | currency:'USD':true}}</td>
+                        <td>
+                            <button class="btn btn-default btn-sm"
+                                    (click)="deleteProduct(product.productId)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -25,16 +25,30 @@ var ProductDetailComponent = /** @class */ (function () {
         this.categories = [];
     }
     ProductDetailComponent.prototype.ngOnInit = function () {
-        this.product = new product_1.Product();
-        this.product.price = 1;
-        this.product.categoryId = 1;
-        this.product.url = 'http://www.fairwaytech.com';
+        var _this = this;
+        this.route.params.forEach(function (params) {
+            if (params['id'] !== undefined) {
+                if (params['id'] != '-1') {
+                    _this.productService.getProduct(params['id'])
+                        .subscribe(function (x) { return _this.product = x; }, function (errors) { return _this.handleErrors(errors); });
+                }
+                else {
+                    _this.product = new product_1.Product();
+                    _this.product.price = 1;
+                    _this.product.categoryId = 1;
+                    _this.product.url = 'http://www.fairwaytech.com';
+                }
+            }
+        });
         this.getCategories();
     };
     ProductDetailComponent.prototype.goBack = function () {
         this.location.back();
     };
     ProductDetailComponent.prototype.updateProduct = function (product) {
+        var _this = this;
+        this.productService.updateProduct(product)
+            .subscribe(function () { return _this.goBack(); }, function (errors) { return _this.handleErrors(errors); });
     };
     ProductDetailComponent.prototype.addProduct = function (product) {
         var _this = this;

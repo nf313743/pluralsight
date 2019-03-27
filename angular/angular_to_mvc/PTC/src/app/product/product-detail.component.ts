@@ -22,10 +22,22 @@ export class ProductDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.product = new Product();
-        this.product.price = 1;
-        this.product.categoryId = 1;
-        this.product.url = 'http://www.fairwaytech.com';
+        this.route.params.forEach((params: Params) => {
+            if (params['id'] !== undefined) {
+                if (params['id'] != '-1') {
+                    this.productService.getProduct(params['id'])
+                        .subscribe(x => this.product = x,
+                            errors => this.handleErrors(errors));
+                }
+                else {
+                    this.product = new Product();
+                    this.product.price = 1;
+                    this.product.categoryId = 1;
+                    this.product.url = 'http://www.fairwaytech.com';
+                }
+            }
+        });
+
         this.getCategories();
     }
 
@@ -34,6 +46,9 @@ export class ProductDetailComponent implements OnInit {
     }
 
     private updateProduct(product: Product) {
+        this.productService.updateProduct(product)
+            .subscribe(() => this.goBack(),
+                errors => this.handleErrors(errors));
     }
 
     private addProduct(product: Product) {

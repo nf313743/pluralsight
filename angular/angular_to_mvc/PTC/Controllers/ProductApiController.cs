@@ -31,6 +31,68 @@ namespace PTC.Controllers
             return ret;
         }
 
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            var vm = new PTCViewModel();
+
+            vm.Delete(id);
+
+            if (vm.LastException != null)
+            {
+                return BadRequest(vm.Message);
+            }
+
+            return Ok(vm.Entity);
+        }
+
+        [HttpPut]
+        public IHttpActionResult Put(int id, Product product)
+        {
+            var vm = new PTCViewModel();
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            vm.Entity = product;
+            vm.PageMode = PDSAPageModeEnum.Edit;
+            vm.Save();
+
+            if (!vm.IsValid)
+            {
+                if (vm.Messages.Count > 0)
+                {
+                    return BadRequest(ConvertToModelState(vm.Messages));
+                }
+                else if (vm.LastException != null)
+                {
+                    return BadRequest(vm.Message);
+                }
+            }
+
+            return Ok(vm.Entity);
+        }
+
+        [HttpGet]
+        public IHttpActionResult Get(int id)
+        {
+            var vm = new PTCViewModel();
+            vm.Get(id);
+
+            if (vm.Entity != null)
+            {
+                return Ok(vm.Entity);
+            }
+            else if (vm.LastException != null)
+            {
+                return BadRequest(vm.Message);
+            }
+
+            return NotFound();
+        }
+
         [HttpPost]
         public IHttpActionResult Post(Product product)
         {

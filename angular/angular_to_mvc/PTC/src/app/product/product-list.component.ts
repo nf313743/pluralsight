@@ -5,6 +5,7 @@ import { CategoryService } from '../category/category.service';
 import { Category } from '../category/category';
 import { ProductSearch } from './productSearch';
 import { Router } from '@angular/router';
+import { error } from 'selenium-webdriver';
 
 @Component({
     templateUrl: './product-list.component.html'
@@ -47,6 +48,18 @@ export class ProductListComponent implements OnInit {
 
     add() {
         this.router.navigate(['/productDetail', -1])
+    }
+
+    selectProduct(id: number) {
+        this.router.navigate(['/productDetail', id])
+    }
+
+    deleteProduct(id: number) {
+        if (confirm('Delete this product?')) {
+            this.productService.deleteProduct(id)
+                .subscribe(() => this.getProducts(),
+                    errors => this.handleErrors(errors));
+        }
     }
 
     private getSearchCategories() {
