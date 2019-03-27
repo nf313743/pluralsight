@@ -29,6 +29,15 @@ export class ProductService {
             .catch(this.handleErrors);
     }
 
+    addProduct(product: Product): Observable<Product> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.url, product, options)
+            .map(this.extractData)
+            .catch(this.handleErrors);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
         return body || {};
@@ -40,7 +49,15 @@ export class ProductService {
         switch (error.status) {
             case 400:
                 let err = error.json();
-                if (err.message) {
+                if (err.modelState) {
+                    let valErrors = err.modelState
+                    for (var key in valErrors) {
+                        for (var i = 0; i < valErrors[key].length; ++i) {
+                            errors.push(valErrors[key][i]);
+                        }
+                    }
+                }
+                else if (err.message) {
                     errors.push(err.messsages);
                 }
                 else {

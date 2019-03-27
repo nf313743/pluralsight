@@ -9,10 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProductListComponent } from './product/product-list.component';
 import { ProductService } from './product/product.service';
 import { CategoryService } from './category/category.service';
+import { ProductDetailComponent } from './product/product-detail.component';
 
 @NgModule({
     imports: [BrowserModule, AppRoutingModule, HttpModule, FormsModule],
-    declarations: [AppComponent, ProductListComponent],
+    declarations: [AppComponent, ProductListComponent, ProductDetailComponent],
     bootstrap: [AppComponent],
     providers: [ProductService, CategoryService]
 })

@@ -27,6 +27,11 @@ var CategoryService = /** @class */ (function () {
             .map(this.extractData)
             .catch(this.handleErrors);
     };
+    CategoryService.prototype.getCategories = function () {
+        return this.http.get(this.url)
+            .map(this.extractData)
+            .catch(this.handleErrors);
+    };
     CategoryService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};

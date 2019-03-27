@@ -1,14 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace PTC.Controllers
 {
     [RoutePrefix("api/CategoryApi")]
-    public class CategoryApiController: ApiController
+    public class CategoryApiController : ApiController
     {
+        public IHttpActionResult Get()
+        {
+            var vm = new PTCViewModel();
+            vm.LoadCategories();
+
+            if (vm.Categories.Count > 0)
+            {
+                return Ok(vm.Categories);
+            }
+            else if (vm.LastException != null)
+            {
+                return BadRequest(vm.Message);
+            }
+
+            return NotFound();
+        }
+
         [HttpPost]
         [Route("SearchCategories")]
         public IHttpActionResult GetSearchCategories()
@@ -18,11 +31,11 @@ namespace PTC.Controllers
 
             vm.LoadSearchCategories();
 
-            if(vm.SearchCategories.Count > 0)
+            if (vm.SearchCategories.Count > 0)
             {
                 ret = Ok(vm.SearchCategories);
             }
-            else if(vm.LastException != null)
+            else if (vm.LastException != null)
             {
                 ret = BadRequest(vm.Message);
             }

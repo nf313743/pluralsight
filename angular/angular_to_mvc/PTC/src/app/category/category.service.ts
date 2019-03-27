@@ -12,7 +12,6 @@ export class CategoryService {
     private url = '/api/categoryApi';
 
     constructor(private http: Http) {
-
     }
 
     getSearchCategories(): Observable<Category[]> {
@@ -20,6 +19,12 @@ export class CategoryService {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.url + '/SearchCategories', null, options)
+            .map(this.extractData)
+            .catch(this.handleErrors);
+    }
+
+    getCategories(): Observable<Category[]> {
+        return this.http.get(this.url)
             .map(this.extractData)
             .catch(this.handleErrors);
     }

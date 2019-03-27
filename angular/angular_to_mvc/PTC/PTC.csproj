@@ -207,6 +207,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\product\product-detail.component.html" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\index.html" />
     <Content Include="src\styles.css" />
@@ -237,6 +238,7 @@
     <Content Include="src\app\product\product-list.component.html" />
     <TypeScriptCompile Include="src\app\category\category.service.ts" />
     <TypeScriptCompile Include="src\app\category\category.ts" />
+    <TypeScriptCompile Include="src\app\product\product-detail.component.ts" />
     <TypeScriptCompile Include="src\app\product\product-list.component.ts" />
     <TypeScriptCompile Include="src\app\product\product.service.ts" />
     <TypeScriptCompile Include="src\app\product\product.ts" />

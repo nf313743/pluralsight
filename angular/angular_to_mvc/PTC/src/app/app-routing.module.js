@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var product_list_component_1 = require("./product/product-list.component");
+var product_detail_component_1 = require("./product/product-detail.component");
 var routes = [
     {
         path: 'productList',
@@ -17,6 +18,10 @@ var routes = [
     {
         path: 'Product/Product',
         redirectTo: 'productList'
+    },
+    {
+        path: 'productDetail/:id',
+        component: product_detail_component_1.ProductDetailComponent
     }
 ];
 var AppRoutingModule = /** @class */ (function () {

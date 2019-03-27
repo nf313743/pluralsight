@@ -33,6 +33,13 @@ var ProductService = /** @class */ (function () {
             .map(this.extractData)
             .catch(this.handleErrors);
     };
+    ProductService.prototype.addProduct = function (product) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(this.url, product, options)
+            .map(this.extractData)
+            .catch(this.handleErrors);
+    };
     ProductService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};
@@ -42,7 +49,15 @@ var ProductService = /** @class */ (function () {
         switch (error.status) {
             case 400:
                 var err = error.json();
-                if (err.message) {
+                if (err.modelState) {
+                    var valErrors = err.modelState;
+                    for (var key in valErrors) {
+                        for (var i = 0; i < valErrors[key].length; ++i) {
+                            errors.push(valErrors[key][i]);
+                        }
+                    }
+                }
+                else if (err.message) {
                     errors.push(err.messsages);
                 }
                 else {

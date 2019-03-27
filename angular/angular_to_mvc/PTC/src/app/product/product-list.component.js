@@ -13,10 +13,12 @@ var core_1 = require("@angular/core");
 var product_service_1 = require("./product.service");
 var category_service_1 = require("../category/category.service");
 var productSearch_1 = require("./productSearch");
+var router_1 = require("@angular/router");
 var ProductListComponent = /** @class */ (function () {
-    function ProductListComponent(productService, categoryService) {
+    function ProductListComponent(productService, categoryService, router) {
         this.productService = productService;
         this.categoryService = categoryService;
+        this.router = router;
         this.products = [];
         this.messages = [];
         this.searchCategories = [];
@@ -42,6 +44,9 @@ var ProductListComponent = /** @class */ (function () {
         this.searchEntity.productName = "";
         this.getProducts();
     };
+    ProductListComponent.prototype.add = function () {
+        this.router.navigate(['/productDetail', -1]);
+    };
     ProductListComponent.prototype.getSearchCategories = function () {
         var _this = this;
         this.categoryService.getSearchCategories()
@@ -59,7 +64,8 @@ var ProductListComponent = /** @class */ (function () {
             templateUrl: './product-list.component.html'
         }),
         __metadata("design:paramtypes", [product_service_1.ProductService,
-            category_service_1.CategoryService])
+            category_service_1.CategoryService,
+            router_1.Router])
     ], ProductListComponent);
     return ProductListComponent;
 }());

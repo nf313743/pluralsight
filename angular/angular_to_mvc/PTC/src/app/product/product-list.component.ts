@@ -4,6 +4,7 @@ import { Product } from './product';
 import { CategoryService } from '../category/category.service';
 import { Category } from '../category/category';
 import { ProductSearch } from './productSearch';
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './product-list.component.html'
@@ -11,7 +12,8 @@ import { ProductSearch } from './productSearch';
 export class ProductListComponent implements OnInit {
     constructor(
         private productService: ProductService,
-        private categoryService: CategoryService) { }
+        private categoryService: CategoryService,
+        private router: Router) { }
 
     ngOnInit() {
         this.searchEntity.categoryId = 0;
@@ -41,6 +43,10 @@ export class ProductListComponent implements OnInit {
         this.searchEntity.categoryId = 0;
         this.searchEntity.productName = "";
         this.getProducts();
+    }
+
+    add() {
+        this.router.navigate(['/productDetail', -1])
     }
 
     private getSearchCategories() {
