@@ -243,6 +243,9 @@
     <TypeScriptCompile Include="src\app\product\product.service.ts" />
     <TypeScriptCompile Include="src\app\product\product.ts" />
     <TypeScriptCompile Include="src\app\product\productSearch.ts" />
+    <TypeScriptCompile Include="src\app\shared\validator-max.directive.ts" />
+    <TypeScriptCompile Include="src\app\shared\validator-min.directive.ts" />
+    <TypeScriptCompile Include="src\app\shared\validator-notlowercase.directive.ts" />
     <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>
   <ItemGroup>

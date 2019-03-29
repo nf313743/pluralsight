@@ -16,13 +16,16 @@ var product_list_component_1 = require("./product/product-list.component");
 var product_service_1 = require("./product/product.service");
 var category_service_1 = require("./category/category.service");
 var product_detail_component_1 = require("./product/product-detail.component");
+var validator_notlowercase_directive_1 = require("./shared/validator-notlowercase.directive");
+var validator_min_Directive_1 = require("./shared/validator-min.Directive");
+var validator_max_directive_1 = require("./shared/validator-max.directive");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule, http_1.HttpModule, forms_1.FormsModule],
-            declarations: [app_component_1.AppComponent, product_list_component_1.ProductListComponent, product_detail_component_1.ProductDetailComponent],
+            declarations: [app_component_1.AppComponent, product_list_component_1.ProductListComponent, product_detail_component_1.ProductDetailComponent, validator_notlowercase_directive_1.NotLowerCaseValidatorDirective, validator_min_Directive_1.MinValidatorDirective, validator_max_directive_1.MaxValidatorDirective],
             bootstrap: [app_component_1.AppComponent],
             providers: [product_service_1.ProductService, category_service_1.CategoryService]
         })
