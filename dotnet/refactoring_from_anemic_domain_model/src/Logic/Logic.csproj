@@ -62,9 +62,9 @@
     <Compile Include="Dtos\CustomerDto.cs" />
     <Compile Include="Dtos\MovieDto.cs" />
     <Compile Include="Dtos\PurchasedMovieDto.cs" />
+    <Compile Include="Entities\CustomerStatus.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\CustomerName.cs" />
-    <Compile Include="Entities\CustomerStatus.cs" />
     <Compile Include="Entities\Dollars.cs" />
     <Compile Include="Entities\Email.cs" />
     <Compile Include="Entities\Entity.cs" />
@@ -79,8 +79,6 @@
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\MovieRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="Services\CustomerService.cs" />
-    <Compile Include="Services\MovieService.cs" />
     <Compile Include="Utils\SessionFactory.cs" />
     <Compile Include="Utils\UnitOfWork.cs" />
   </ItemGroup>

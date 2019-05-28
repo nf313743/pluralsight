@@ -13,6 +13,8 @@ namespace Logic.Entities
             Value = value;
         }
 
+        public bool IsZero => Value == 0m;
+
         public static Result<Dollars> Create(decimal dollarAmount)
         {
             if (dollarAmount < 0)
