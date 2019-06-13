@@ -1,0 +1,11 @@
+{
+    "ConnectionStrings":{
+        "DutchConnectionString": "Data Source=./Database/DutchTreatDb.db"
+    },
+    "Logging":{
+        "LogLevel":{
+            "DutchTreat":"Information",
+            "Microsoft":"Warning"
+        }
+    }
+}
