@@ -7,5 +7,10 @@
             "DutchTreat":"Information",
             "Microsoft":"Warning"
         }
+        },
+        "Tokens":{
+            "Key": "dsdfgsgsdfgdfgsdfgdfg4t",
+            "Issuer": "localhost",
+            "Audience" : "users"
     }
 }
