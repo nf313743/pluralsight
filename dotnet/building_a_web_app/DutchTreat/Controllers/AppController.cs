@@ -10,7 +10,7 @@ namespace DutchTreat.Controllers
     {
         private readonly IMailService _mailService;
         private readonly IDutchRepository _repository;
-        
+
 
         public AppController(
             IMailService mailService,
@@ -51,8 +51,8 @@ namespace DutchTreat.Controllers
 
         public IActionResult Shop()
         {
-            var results =_repository.GetAllProducts();
-            
+            var results = _repository.GetAllProducts();
+
             return View(results);
         }
     }

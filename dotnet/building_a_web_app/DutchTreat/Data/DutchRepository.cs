@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DutchTreat.Data.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace DutchTreat.Data
@@ -23,23 +25,52 @@ namespace DutchTreat.Data
             {
 
                 _logger.LogInformation("GetAllProducts called");
-                return _context.Products.OrderBy(x=> x.Title).ToList();
+                return _context.Products.OrderBy(x => x.Title).ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Failed to get all products: {ex}");
                 return null;
             }
         }
 
+        public IEnumerable<Order> GetAllOrders(bool includeItems)
+        {
+            if (includeItems)
+            {
+                return _context.Orders
+                            .Include(x => x.Items)
+                            .ThenInclude(x => x.Product)
+                            .ToList();
+            }
+            else
+            {
+                return _context.Orders.ToList();
+            }
+        }
+
         public IEnumerable<Product> GetProductsByCategory(string category)
         {
-            return _context.Products.Where(x=> x.Category == category).ToList();
+            return _context.Products.Where(x => x.Category == category).ToList();
         }
 
         public bool SaveAll()
         {
             return _context.SaveChanges() > 0;
+        }
+
+        public Order GetOrderById(int id)
+        {
+            return _context.Orders
+                            .Include(x => x.Items)
+                            .ThenInclude(x => x.Product)
+                            .Where(x => x.Id == id)
+                            .FirstOrDefault();
+        }
+
+        public void AddEntity(object model)
+        {
+            _context.Add(model);
         }
     }
 }
