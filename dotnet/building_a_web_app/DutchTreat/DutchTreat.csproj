@@ -3,14 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <typescripttoolsversion>3.1</typescripttoolsversion>
   </PropertyGroup>
+
 
   <ItemGroup>
     <PackageReference Include="automapper" Version="8.1.1" />
     <PackageReference Include="Automapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.4" />    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.4" />    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.5.2">
+  <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+  <PrivateAssets>all</PrivateAssets>
+</PackageReference>
     <PackageReference Include="odetocode.usenodemodules" Version="1.0.6" />
   </ItemGroup>
 
