@@ -1,22 +1,22 @@
- class StoreCustomer {
-    public visits: number = 0;
-    private ourName:string;
+//  class StoreCustomer {
+//     public visits: number = 0;
+//     private ourName:string;
 
 
-    constructor(private firstName:string, private lastName:string) {
+//     constructor(private firstName:string, private lastName:string) {
            
-    }
+//     }
 
-    public showName(){
-        alert(this.firstName + " " + this.lastName);
-    }
+//     public showName(){
+//         alert(this.firstName + " " + this.lastName);
+//     }
 
-    set name(val){
-        this.ourName = val;
-    }
+//     set name(val){
+//         this.ourName = val;
+//     }
 
-    get name(){
-        return this.ourName;
-    }
+//     get name(){
+//         return this.ourName;
+//     }
     
-}
+// }

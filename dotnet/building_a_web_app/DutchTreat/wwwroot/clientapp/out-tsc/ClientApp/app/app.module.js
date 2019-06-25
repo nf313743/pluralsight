@@ -11,37 +11,40 @@ import { Shop } from './shop/shop.component';
 import { Checkout } from './checkout/checkout.component';
 import { Login } from './login/login.component';
 import { FormsModule } from "@angular/forms";
-let routes = [
+var routes = [
     { path: "", component: Shop },
     { path: "checkout", component: Checkout },
     { path: "login", component: Login }
 ];
-let AppModule = class AppModule {
-};
-AppModule = tslib_1.__decorate([
-    NgModule({
-        declarations: [
-            AppComponent,
-            ProductList,
-            Cart,
-            Shop,
-            Checkout,
-            Login
-        ],
-        imports: [
-            BrowserModule,
-            HttpClientModule,
-            RouterModule.forRoot(routes, {
-                useHash: true,
-                enableTracing: false // For debugging routes
-            }),
-            FormsModule
-        ],
-        providers: [
-            DataService
-        ],
-        bootstrap: [AppComponent]
-    })
-], AppModule);
+var AppModule = /** @class */ (function () {
+    function AppModule() {
+    }
+    AppModule = tslib_1.__decorate([
+        NgModule({
+            declarations: [
+                AppComponent,
+                ProductList,
+                Cart,
+                Shop,
+                Checkout,
+                Login
+            ],
+            imports: [
+                BrowserModule,
+                HttpClientModule,
+                RouterModule.forRoot(routes, {
+                    useHash: true,
+                    enableTracing: false // For debugging routes
+                }),
+                FormsModule
+            ],
+            providers: [
+                DataService
+            ],
+            bootstrap: [AppComponent]
+        })
+    ], AppModule);
+    return AppModule;
+}());
 export { AppModule };
 //# sourceMappingURL=app.module.js.map

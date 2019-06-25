@@ -1,17 +1,16 @@
-class StoreCustomer {
-    constructor(firstName, lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.visits = 0;
-    }
-    showName() {
-        alert(this.firstName + " " + this.lastName);
-    }
-    set name(val) {
-        this.ourName = val;
-    }
-    get name() {
-        return this.ourName;
-    }
-}
+//  class StoreCustomer {
+//     public visits: number = 0;
+//     private ourName:string;
+//     constructor(private firstName:string, private lastName:string) {
+//     }
+//     public showName(){
+//         alert(this.firstName + " " + this.lastName);
+//     }
+//     set name(val){
+//         this.ourName = val;
+//     }
+//     get name(){
+//         return this.ourName;
+//     }
+// }
 //# sourceMappingURL=storecustomer.js.map

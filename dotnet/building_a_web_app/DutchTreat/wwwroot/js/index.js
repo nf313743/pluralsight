@@ -1,21 +1,21 @@
 $(document).ready(function(){
-    let theForm = $('#theForm');
+    var theForm = $('#theForm');
 
     theForm.hide();
 
-    let button = $('#buyButton');
+    var button = $('#buyButton');
     button.on('click', function(){
         console.log('Buying Item');
     });
 
-    let productInfo = $('.product-props li');
+    var productInfo = $('.product-props li');
     
     productInfo.on('click', function(){
         console.log('You clicked on ' + $(this).text());
     });
 
-    let $logginToggle = $('#loginToggle');
-    let $popupForm = $('.popup-form');
+    var $logginToggle = $('#loginToggle');
+    var $popupForm = $('.popup-form');
 
     $logginToggle.on('click', function(){
         $popupForm.toggle(100);
