@@ -7,11 +7,14 @@ namespace Logic.Students
     public class Student : Entity
     {
         public virtual string Name { get; set; }
+
         public virtual string Email { get; set; }
 
         private readonly IList<Enrollment> _enrollments = new List<Enrollment>();
         public virtual IReadOnlyList<Enrollment> Enrollments => _enrollments.ToList();
+
         public virtual Enrollment FirstEnrollment => GetEnrollment(0);
+
         public virtual Enrollment SecondEnrollment => GetEnrollment(1);
 
         private readonly IList<Disenrollment> _disenrollments = new List<Disenrollment>();
@@ -28,7 +31,7 @@ namespace Logic.Students
             Email = email;
         }
 
-        private Enrollment GetEnrollment(int index)
+        public virtual Enrollment GetEnrollment(int index)
         {
             if (_enrollments.Count > index)
                 return _enrollments[index];
@@ -36,13 +39,9 @@ namespace Logic.Students
             return null;
         }
 
-        public virtual void RemoveEnrollment(Enrollment enrollment)
+        public virtual void RemoveEnrollment(Enrollment enrollment, string comment)
         {
             _enrollments.Remove(enrollment);
-        }
-
-        public virtual void AddDisenrollmentComment(Enrollment enrollment, string comment)
-        {
             var disenrollment = new Disenrollment(enrollment.Student, enrollment.Course, comment);
             _disenrollments.Add(disenrollment);
         }
