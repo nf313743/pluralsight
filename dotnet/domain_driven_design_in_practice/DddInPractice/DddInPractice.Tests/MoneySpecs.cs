@@ -17,7 +17,7 @@ namespace DddInPractice.Tests
 
             sum.OneCentCount.Should().Be(2);
             sum.TenCentCount.Should().Be(4);
-            sum.QuarterCentCount.Should().Be(6);
+            sum.QuarterCount.Should().Be(6);
             sum.OneDollarCount.Should().Be(8);
             sum.FiveDollarCount.Should().Be(10);
             sum.TwentyDollarCount.Should().Be(12);
@@ -109,7 +109,7 @@ namespace DddInPractice.Tests
 
             result.OneCentCount.Should().Be(9);
             result.TenCentCount.Should().Be(8);
-            result.QuarterCentCount.Should().Be(7);
+            result.QuarterCount.Should().Be(7);
             result.OneDollarCount.Should().Be(6);
             result.FiveDollarCount.Should().Be(5);
             result.TwentyDollarCount.Should().Be(4);
@@ -127,6 +127,31 @@ namespace DddInPractice.Tests
             };
 
             action.Should().Throw<InvalidOperationException>();
+        }
+
+        [Theory]
+        [InlineData(1, 0, 0, 0, 0, 0, "¢1")]
+        [InlineData(0, 0, 0, 1, 0, 0, "$1.00")]
+        [InlineData(1, 0, 0, 1, 0, 0, "$1.01")]
+        [InlineData(0, 0, 2, 1, 0, 0, "$1.50")]
+        public void To_string_should_return_amount_of_money(
+            int oneCentCount,
+            int tenCentCount,
+            int quarterCount,
+            int oneDollarCount,
+            int fiveDollarCount,
+            int twentyDollarCount,
+            string expectedString)
+        {
+            var money = new Money(
+                oneCentCount,
+                tenCentCount,
+                quarterCount,
+                oneDollarCount,
+                fiveDollarCount,
+                twentyDollarCount);
+
+            money.ToString().Should().Be(expectedString);
         }
     }
 }

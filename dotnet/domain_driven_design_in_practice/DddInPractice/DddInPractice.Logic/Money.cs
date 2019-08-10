@@ -16,7 +16,7 @@ namespace DddInPractice.Logic
 
         public int TenCentCount { get; }
 
-        public int QuarterCentCount { get; }
+        public int QuarterCount { get; }
 
         public int OneDollarCount { get; }
 
@@ -27,7 +27,7 @@ namespace DddInPractice.Logic
         public decimal Amount =>
                     OneCentCount * 0.01m
                     + TenCentCount * 0.10m
-                    + QuarterCentCount * 0.25m
+                    + QuarterCount * 0.25m
                     + OneDollarCount
                     + FiveDollarCount * 5m
                     + TwentyDollarCount * 20m;
@@ -38,7 +38,7 @@ namespace DddInPractice.Logic
             int quarterCount,
             int oneDollarCount,
             int fiveDollarCount,
-            int twentyDollarCount)
+            int twentyDollarCount) : this()
         {
             if (oneCentCount < 0)
                 throw new InvalidOperationException();
@@ -60,10 +60,14 @@ namespace DddInPractice.Logic
 
             OneCentCount += oneCentCount;
             TenCentCount += tenCentCount;
-            QuarterCentCount += quarterCount;
+            QuarterCount += quarterCount;
             OneDollarCount += oneDollarCount;
             FiveDollarCount += fiveDollarCount;
             TwentyDollarCount += twentyDollarCount;
+        }
+
+        private Money()
+        {
         }
 
         public static Money operator +(Money money1, Money money2)
@@ -71,7 +75,7 @@ namespace DddInPractice.Logic
             var sum = new Money(
                 money1.OneCentCount + money2.OneCentCount,
                 money1.TenCentCount + money2.TenCentCount,
-                money1.QuarterCentCount + money2.QuarterCentCount,
+                money1.QuarterCount + money2.QuarterCount,
                 money1.OneDollarCount + money2.OneDollarCount,
                 money1.FiveDollarCount + money2.FiveDollarCount,
                 money1.TwentyDollarCount + money2.TwentyDollarCount);
@@ -84,7 +88,7 @@ namespace DddInPractice.Logic
             var sum = new Money(
                 money1.OneCentCount - money2.OneCentCount,
                 money1.TenCentCount - money2.TenCentCount,
-                money1.QuarterCentCount - money2.QuarterCentCount,
+                money1.QuarterCount - money2.QuarterCount,
                 money1.OneDollarCount - money2.OneDollarCount,
                 money1.FiveDollarCount - money2.FiveDollarCount,
                 money1.TwentyDollarCount - money2.TwentyDollarCount);
@@ -96,7 +100,7 @@ namespace DddInPractice.Logic
         {
             return OneCentCount == other.OneCentCount
                  && TenCentCount == other.TenCentCount
-                 && QuarterCentCount == other.QuarterCentCount
+                 && QuarterCount == other.QuarterCount
                  && OneDollarCount == other.OneDollarCount
                  && FiveDollarCount == other.FiveDollarCount
                  && TwentyDollarCount == other.TwentyDollarCount;
@@ -108,12 +112,20 @@ namespace DddInPractice.Logic
             {
                 int hashCode = OneCentCount;
                 hashCode = (hashCode * 397) ^ TenCentCount;
-                hashCode = (hashCode * 397) ^ QuarterCentCount;
+                hashCode = (hashCode * 397) ^ QuarterCount;
                 hashCode = (hashCode * 397) ^ OneDollarCount;
                 hashCode = (hashCode * 397) ^ FiveDollarCount;
                 hashCode = (hashCode * 397) ^ TwentyDollarCount;
                 return hashCode;
             }
+        }
+
+        public override string ToString()
+        {
+            if (Amount < 1m)
+                return "¢" + (Amount * 100).ToString("0");
+
+            return "$" + Amount.ToString("0.00");
         }
     }
 }
