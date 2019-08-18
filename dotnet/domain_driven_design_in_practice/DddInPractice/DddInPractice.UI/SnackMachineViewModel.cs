@@ -10,7 +10,7 @@ namespace DddInPractice.UI
 
         public override string Caption => "Snack Machine";
         public string MoneyInTransaction => _snackMachine.MoneyInTransaction.ToString();
-        public Money MoneyInside => _snackMachine.MoneyInside + _snackMachine.MoneyInTransaction;
+        public Money MoneyInside => _snackMachine.MoneyInside;
 
         private string _message = "";
 
@@ -49,7 +49,7 @@ namespace DddInPractice.UI
 
         private void BuySnack()
         {
-            _snackMachine.BuySnack();
+            _snackMachine.BuySnack(1);
             using (ISession session = SessionFactory.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
             {

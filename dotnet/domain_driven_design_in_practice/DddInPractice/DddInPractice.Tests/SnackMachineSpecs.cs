@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DddInPractice.Logic;
 using FluentAssertions;
 using Xunit;
@@ -17,7 +18,7 @@ namespace DddInPractice.Tests
 
             snackMachine.ReturnMoney();
 
-            snackMachine.MoneyInTransaction.Amount.Should().Be(0m);
+            snackMachine.MoneyInTransaction.Should().Be(0m);
         }
 
         [Fact]
@@ -27,7 +28,7 @@ namespace DddInPractice.Tests
             snackMachine.InsertMoney(Cent);
             snackMachine.InsertMoney(Dollar);
 
-            snackMachine.MoneyInTransaction.Amount.Should().Be(1.01m);
+            snackMachine.MoneyInTransaction.Should().Be(1.01m);
         }
 
         [Fact]
@@ -42,16 +43,81 @@ namespace DddInPractice.Tests
         }
 
         [Fact]
-        public void Money_in_transaction_go_to_money_inside_after_purchase()
+        public void BuySnack_trades_inserted_money_for_a_snack()
         {
             var snackMachine = new SnackMachine();
-            snackMachine.InsertMoney(Dollar);
+            snackMachine.LoadSnacks(1, new SnackPile(new Snack("Some snack"), 10, 1m));
             snackMachine.InsertMoney(Dollar);
 
-            snackMachine.BuySnack();
+            snackMachine.BuySnack(1);
 
-            snackMachine.MoneyInTransaction.Should().Be(None);
-            snackMachine.MoneyInside.Amount.Should().Be(2m);
+            snackMachine.MoneyInTransaction.Should().Be(0m);
+            snackMachine.MoneyInside.Amount.Should().Be(1m);
+            snackMachine.GetSnackPile(1).Quantity.Should().Be(9);
+        }
+
+        [Fact]
+        public void Cannot_make_purchase_when_there_is_no_snacks()
+        {
+            var snackMachine = new SnackMachine();
+
+            Action action = () => snackMachine.BuySnack(1);
+
+            action.Should().Throw<InvalidOperationException>();
+        }
+
+        [Fact]
+        public void Cannot_male_purchase_if_not_enough_money_inserted()
+        {
+            var snackMachine = new SnackMachine();
+            snackMachine.LoadSnacks(1, new SnackPile(new Snack("Some Snack"), 1, 2m));
+            snackMachine.InsertMoney(Dollar);
+
+            Action action = () => snackMachine.BuySnack(1);
+
+            action.Should().Throw<InvalidOperationException>();
+        }
+
+        [Fact]
+        public void Snack_machine_returns_moeny_with_highest_denomination_first()
+        {
+            var snackMachine = new SnackMachine();
+            snackMachine.LoadMoney(Dollar);
+
+            snackMachine.InsertMoney(Quarter);
+            snackMachine.InsertMoney(Quarter);
+            snackMachine.InsertMoney(Quarter);
+            snackMachine.InsertMoney(Quarter);
+            snackMachine.ReturnMoney();
+
+            snackMachine.MoneyInside.QuarterCount.Should().Be(4);
+            snackMachine.MoneyInside.OneDollarCount.Should().Be(0);
+        }
+
+        [Fact]
+        public void After_purchase_change_is_returned()
+        {
+            var snackMachine = new SnackMachine();
+            snackMachine.LoadSnacks(1, new SnackPile(new Snack("Some Snack"), 1, 0.5m));
+            snackMachine.LoadMoney(TenCent * 10);
+
+            snackMachine.InsertMoney(Dollar);
+            snackMachine.BuySnack(1);
+
+            snackMachine.MoneyInside.Amount.Should().Be(1.5m);
+            snackMachine.MoneyInTransaction.Should().Be(0m);
+        }
+
+        [Fact]
+        public void Cannot_buy_snack_if_not_enough_change()
+        {
+            var snackMachine = new SnackMachine();
+            snackMachine.LoadSnacks(1, new SnackPile(new Snack("Some snack"), 1, 0.5m));
+            snackMachine.InsertMoney(Dollar);
+
+            Action action = () => snackMachine.BuySnack(1);
+
+            action.Should().Throw<InvalidOperationException>();
         }
     }
 }
