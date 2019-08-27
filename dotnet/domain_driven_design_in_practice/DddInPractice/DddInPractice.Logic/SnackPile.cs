@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DddInPractice.Logic
 {
     public sealed class SnackPile : ValueObject<SnackPile>
     {
+        public static readonly SnackPile Empty = new SnackPile(Snack.None, 0, 0m);
+
         public Snack Snack { get; }
         public int Quantity { get; }
         public decimal Price { get; }
@@ -18,14 +18,19 @@ namespace DddInPractice.Logic
         {
             if (quantity < 0)
                 throw new InvalidOperationException();
-            if (price < 0m)
+            if (price < 0)
                 throw new InvalidOperationException();
-            if (price % 0.01m > 0m)
+            if (price % 0.01m > 0)
                 throw new InvalidOperationException();
 
             Snack = snack;
             Quantity = quantity;
             Price = price;
+        }
+
+        public SnackPile SubtractOne()
+        {
+            return new SnackPile(Snack, Quantity - 1, Price);
         }
 
         protected override bool EqualsCore(SnackPile other)
@@ -44,11 +49,6 @@ namespace DddInPractice.Logic
                 hashCode = (hashCode * 397) ^ Price.GetHashCode();
                 return hashCode;
             }
-        }
-
-        public SnackPile SubtractOne()
-        {
-            return new SnackPile(Snack, Quantity - 1, Price);
         }
     }
 }

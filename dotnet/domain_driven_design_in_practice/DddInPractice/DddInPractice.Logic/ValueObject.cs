@@ -1,6 +1,7 @@
 ﻿namespace DddInPractice.Logic
 {
-    public abstract class ValueObject<T> where T : ValueObject<T>
+    public abstract class ValueObject<T>
+        where T : ValueObject<T>
     {
         public override bool Equals(object obj)
         {

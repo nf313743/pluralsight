@@ -1,6 +1,9 @@
-using System;
+﻿using System;
+
 using DddInPractice.Logic;
+
 using FluentAssertions;
+
 using Xunit;
 
 namespace DddInPractice.Tests
@@ -10,10 +13,10 @@ namespace DddInPractice.Tests
         [Fact]
         public void Sum_of_two_moneys_produces_correct_result()
         {
-            var money1 = new Money(1, 2, 3, 4, 5, 6);
-            var money2 = new Money(1, 2, 3, 4, 5, 6);
+            Money money1 = new Money(1, 2, 3, 4, 5, 6);
+            Money money2 = new Money(1, 2, 3, 4, 5, 6);
 
-            var sum = money1 + money2;
+            Money sum = money1 + money2;
 
             sum.OneCentCount.Should().Be(2);
             sum.TenCentCount.Should().Be(4);
@@ -26,8 +29,8 @@ namespace DddInPractice.Tests
         [Fact]
         public void Two_money_instances_equal_if_contain_the_same_money_amount()
         {
-            var money1 = new Money(1, 2, 3, 4, 5, 6);
-            var money2 = new Money(1, 2, 3, 4, 5, 6);
+            Money money1 = new Money(1, 2, 3, 4, 5, 6);
+            Money money2 = new Money(1, 2, 3, 4, 5, 6);
 
             money1.Should().Be(money2);
             money1.GetHashCode().Should().Be(money2.GetHashCode());
@@ -36,8 +39,8 @@ namespace DddInPractice.Tests
         [Fact]
         public void Two_money_instances_do_not_equal_if_contain_different_money_amounts()
         {
-            var dollar = new Money(0, 0, 0, 1, 0, 0);
-            var hundredCents = new Money(100, 0, 0, 0, 0, 0);
+            Money dollar = new Money(0, 0, 0, 1, 0, 0);
+            Money hundredCents = new Money(100, 0, 0, 0, 0, 0);
 
             dollar.Should().NotBe(hundredCents);
             dollar.GetHashCode().Should().NotBe(hundredCents.GetHashCode());
@@ -89,23 +92,23 @@ namespace DddInPractice.Tests
             decimal expectedAmount)
         {
             var money = new Money(
-                 oneCentCount,
-                 tenCentCount,
-                 quarterCount,
-                 oneDollarCount,
-                 fiveDollarCount,
-                 twentyDollarCount);
+                oneCentCount,
+                tenCentCount,
+                quarterCount,
+                oneDollarCount,
+                fiveDollarCount,
+                twentyDollarCount);
 
             money.Amount.Should().Be(expectedAmount);
         }
 
         [Fact]
-        public void Subtraction_of_two_money_produces_correct_result()
+        public void Subtraction_of_two_moneys_produces_correct_result()
         {
-            var money1 = new Money(10, 10, 10, 10, 10, 10);
-            var money2 = new Money(1, 2, 3, 4, 5, 6);
+            Money money1 = new Money(10, 10, 10, 10, 10, 10);
+            Money money2 = new Money(1, 2, 3, 4, 5, 6);
 
-            var result = money1 - money2;
+            Money result = money1 - money2;
 
             result.OneCentCount.Should().Be(9);
             result.TenCentCount.Should().Be(8);
@@ -118,23 +121,23 @@ namespace DddInPractice.Tests
         [Fact]
         public void Cannot_subtract_more_than_exists()
         {
-            var money1 = new Money(0, 1, 0, 0, 0, 0);
-            var money2 = new Money(1, 0, 0, 0, 0, 0);
+            Money money1 = new Money(0, 1, 0, 0, 0, 0);
+            Money money2 = new Money(1, 0, 0, 0, 0, 0);
 
             Action action = () =>
             {
-                var money = money1 - money2;
+                Money money = money1 - money2;
             };
 
             action.Should().Throw<InvalidOperationException>();
         }
 
         [Theory]
-        [InlineData(1, 0, 0, 0, 0, 0, "�1")]
+        [InlineData(1, 0, 0, 0, 0, 0, "¢1")]
         [InlineData(0, 0, 0, 1, 0, 0, "$1.00")]
         [InlineData(1, 0, 0, 1, 0, 0, "$1.01")]
         [InlineData(0, 0, 2, 1, 0, 0, "$1.50")]
-        public void To_string_should_return_amount_of_money(
+        public void To_string_returns_correct_string_representation(
             int oneCentCount,
             int tenCentCount,
             int quarterCount,
@@ -143,7 +146,7 @@ namespace DddInPractice.Tests
             int twentyDollarCount,
             string expectedString)
         {
-            var money = new Money(
+            Money money = new Money(
                 oneCentCount,
                 tenCentCount,
                 quarterCount,

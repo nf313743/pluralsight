@@ -4,6 +4,5 @@
         Title="DDD in Practice" Height="550" Width="725"
         Icon="{StaticResource imgApplicationIcon}">
     <Grid>
-        
     </Grid>
 </Window>

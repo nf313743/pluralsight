@@ -1,52 +1,8 @@
-USE [master]
-GO
 CREATE DATABASE [DddInPractice]
 GO
 USE [DddInPractice]
 GO
-/****** Object:  Table [dbo].[Atm]    Script Date: 1/5/2016 9:48:48 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Atm](
-	[AtmID] [bigint] NOT NULL,
-	[MoneyCharged] [decimal](18, 2) NOT NULL,
-	[OneCentCount] [int] NOT NULL,
-	[TenCentCount] [int] NOT NULL,
-	[QuarterCount] [int] NOT NULL,
-	[OneDollarCount] [int] NOT NULL,
-	[FiveDollarCount] [int] NOT NULL,
-	[TwentyDollarCount] [int] NOT NULL,
- CONSTRAINT [PK_Atm] PRIMARY KEY CLUSTERED 
-(
-	[AtmID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-/****** Object:  Table [dbo].[HeadOffice]    Script Date: 1/5/2016 9:48:48 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[HeadOffice](
-	[HeadOfficeID] [bigint] NOT NULL,
-	[Balance] [decimal](18, 2) NOT NULL,
-	[OneCentCount] [int] NOT NULL,
-	[TenCentCount] [int] NOT NULL,
-	[QuarterCount] [int] NOT NULL,
-	[OneDollarCount] [int] NOT NULL,
-	[FiveDollarCount] [int] NOT NULL,
-	[TwentyDollarCount] [int] NOT NULL,
- CONSTRAINT [PK_HeadOffice] PRIMARY KEY CLUSTERED 
-(
-	[HeadOfficeID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-/****** Object:  Table [dbo].[Ids]    Script Date: 1/5/2016 9:48:48 AM ******/
+/****** Object:  Table [dbo].[Ids]    Script Date: 12/6/2015 4:46:56 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -61,7 +17,7 @@ CREATE TABLE [dbo].[Ids](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Slot]    Script Date: 1/5/2016 9:48:48 AM ******/
+/****** Object:  Table [dbo].[Slot]    Script Date: 12/6/2015 4:46:56 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -80,7 +36,7 @@ CREATE TABLE [dbo].[Slot](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Snack]    Script Date: 1/5/2016 9:48:48 AM ******/
+/****** Object:  Table [dbo].[Snack]    Script Date: 12/6/2015 4:46:56 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -95,13 +51,13 @@ CREATE TABLE [dbo].[Snack](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[SnackMachine]    Script Date: 1/5/2016 9:48:48 AM ******/
+/****** Object:  Table [dbo].[SnackMachine]    Script Date: 12/6/2015 4:46:56 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[SnackMachine](
-	[SnackMachineID] [bigint] NOT NULL,
+	[SnackMachineID] [bigint] IDENTITY(1,1) NOT NULL,
 	[OneCentCount] [int] NOT NULL,
 	[TenCentCount] [int] NOT NULL,
 	[QuarterCount] [int] NOT NULL,
@@ -114,14 +70,6 @@ CREATE TABLE [dbo].[SnackMachine](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-GO
-INSERT [dbo].[Atm] ([AtmID], [MoneyCharged], [OneCentCount], [TenCentCount], [QuarterCount], [OneDollarCount], [FiveDollarCount], [TwentyDollarCount]) VALUES (1, CAST(0 AS Decimal(18, 2)), 20, 20, 20, 20,20, 20)
-GO
-INSERT [dbo].[HeadOffice] ([HeadOfficeID], [Balance], [OneCentCount], [TenCentCount], [QuarterCount], [OneDollarCount], [FiveDollarCount], [TwentyDollarCount]) VALUES (1, CAST(0 AS Decimal(18, 2)), 0, 0, 0, 0, 0, 0)
-GO
-INSERT [dbo].[Ids] ([EntityName], [NextHigh]) VALUES (N'Atm', 1)
-GO
-INSERT [dbo].[Ids] ([EntityName], [NextHigh]) VALUES (N'HeadOffice', 1)
 GO
 INSERT [dbo].[Ids] ([EntityName], [NextHigh]) VALUES (N'Slot', 1)
 GO
@@ -140,9 +88,13 @@ GO
 INSERT [dbo].[Snack] ([SnackID], [Name]) VALUES (2, N'Soda')
 GO
 INSERT [dbo].[Snack] ([SnackID], [Name]) VALUES (3, N'Gum')
+GO
+SET IDENTITY_INSERT [dbo].[SnackMachine] ON 
 
 GO
-INSERT [dbo].[SnackMachine] ([SnackMachineID], [OneCentCount], [TenCentCount], [QuarterCount], [OneDollarCount], [FiveDollarCount], [TwentyDollarCount]) VALUES (1, 10, 10, 10, 10, 10, 10)
+INSERT [dbo].[SnackMachine] ([SnackMachineID], [OneCentCount], [TenCentCount], [QuarterCount], [OneDollarCount], [FiveDollarCount], [TwentyDollarCount]) VALUES (1, 1, 1, 1, 1, 1, 1)
+GO
+SET IDENTITY_INSERT [dbo].[SnackMachine] OFF
 GO
 ALTER TABLE [dbo].[Slot] ADD  CONSTRAINT [DF_Slot_Position]  DEFAULT ((1)) FOR [Position]
 GO
@@ -155,8 +107,4 @@ ALTER TABLE [dbo].[Slot]  WITH CHECK ADD  CONSTRAINT [FK_Slot_SnackMachine] FORE
 REFERENCES [dbo].[SnackMachine] ([SnackMachineID])
 GO
 ALTER TABLE [dbo].[Slot] CHECK CONSTRAINT [FK_Slot_SnackMachine]
-GO
-USE [master]
-GO
-ALTER DATABASE [DddInPractice] SET  READ_WRITE 
 GO

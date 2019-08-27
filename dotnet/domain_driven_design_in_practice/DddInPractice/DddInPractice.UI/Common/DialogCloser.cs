@@ -10,12 +10,10 @@ namespace DddInPractice.UI.Common
             typeof(DialogCloser),
             new PropertyMetadata(DialogResultChanged));
 
-
         public static void SetDialogResult(Window target, bool? value)
         {
             target.SetValue(DialogResultProperty, value);
         }
-
 
         private static void DialogResultChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

@@ -1,7 +1,5 @@
-﻿using FluentNHibernate.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FluentNHibernate;
+using FluentNHibernate.Mapping;
 
 namespace DddInPractice.Logic
 {
@@ -12,14 +10,19 @@ namespace DddInPractice.Logic
             Id(x => x.Id);
 
             Component(x => x.MoneyInside, y =>
-             {
-                 y.Map(x => x.OneCentCount);
-                 y.Map(x => x.TenCentCount);
-                 y.Map(x => x.QuarterCount);
-                 y.Map(x => x.OneDollarCount);
-                 y.Map(x => x.FiveDollarCount);
-                 y.Map(x => x.TwentyDollarCount);
-             });
+            {
+                y.Map(x => x.OneCentCount);
+                y.Map(x => x.TenCentCount);
+                y.Map(x => x.QuarterCount);
+                y.Map(x => x.OneDollarCount);
+                y.Map(x => x.FiveDollarCount);
+                y.Map(x => x.TwentyDollarCount);
+            });
+
+            HasMany<Slot>(Reveal.Member<SnackMachine>("Slots"))
+                .Cascade.SaveUpdate()
+                .Not.LazyLoad()
+                .Inverse();
         }
     }
 }

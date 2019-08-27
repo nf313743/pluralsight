@@ -1,11 +1,4 @@
-﻿using DddInPractice.Logic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DddInPractice.Logic.UI
+﻿namespace DddInPractice.Logic
 {
     public static class Initer
     {

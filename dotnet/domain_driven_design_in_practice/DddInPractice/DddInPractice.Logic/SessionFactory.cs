@@ -1,14 +1,11 @@
-﻿using FluentNHibernate.Cfg;
+﻿using System.Reflection;
+using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.AcceptanceCriteria;
 using FluentNHibernate.Conventions.Helpers;
 using FluentNHibernate.Conventions.Instances;
 using NHibernate;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
 
 namespace DddInPractice.Logic
 {
@@ -38,7 +35,7 @@ namespace DddInPractice.Logic
                             .When(criteria => criteria.Expect(x => x.Nullable, Is.Not.Set), x => x.Not.Nullable()))
                     .Conventions.Add<TableNameConvention>()
                     .Conventions.Add<HiLoConvention>()
-                    );
+                );
 
             return configuration.BuildSessionFactory();
         }

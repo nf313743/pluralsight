@@ -14,19 +14,16 @@ namespace DddInPractice.UI.Common
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-
         public Command(Action<T> execute)
             : this(_ => true, execute)
         {
         }
-
 
         public Command(Func<T, bool> canExecute, Action<T> execute)
         {
             this.execute = execute;
             this.canExecute = canExecute;
         }
-
 
         public bool CanExecute(object parameter)
         {
@@ -36,13 +33,11 @@ namespace DddInPractice.UI.Common
             return canExecute((T)parameter);
         }
 
-
         public void Execute(object parameter)
         {
             execute((T)parameter);
         }
     }
-
 
     public class Command : Command<object>
     {
@@ -50,7 +45,6 @@ namespace DddInPractice.UI.Common
             : base(_ => canExecute(), _ => execute())
         {
         }
-
 
         public Command(Action execute)
             : this(() => true, execute)

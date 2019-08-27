@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
 using DddInPractice.Logic;
 using FluentAssertions;
 using Xunit;
-
 using static DddInPractice.Logic.Money;
+using static DddInPractice.Logic.Snack;
 
 namespace DddInPractice.Tests
 {
@@ -25,6 +24,7 @@ namespace DddInPractice.Tests
         public void Inserted_money_goes_to_money_in_transaction()
         {
             var snackMachine = new SnackMachine();
+
             snackMachine.InsertMoney(Cent);
             snackMachine.InsertMoney(Dollar);
 
@@ -34,10 +34,10 @@ namespace DddInPractice.Tests
         [Fact]
         public void Cannot_insert_more_than_one_coin_or_note_at_a_time()
         {
-            var snakeMachine = new SnackMachine();
-            var twoCents = Cent + Cent;
+            var snackMachine = new SnackMachine();
+            Money twoCent = Cent + Cent;
 
-            Action action = () => snakeMachine.InsertMoney(twoCents);
+            Action action = () => snackMachine.InsertMoney(twoCent);
 
             action.Should().Throw<InvalidOperationException>();
         }
@@ -46,7 +46,7 @@ namespace DddInPractice.Tests
         public void BuySnack_trades_inserted_money_for_a_snack()
         {
             var snackMachine = new SnackMachine();
-            snackMachine.LoadSnacks(1, new SnackPile(new Snack("Some snack"), 10, 1m));
+            snackMachine.LoadSnacks(1, new SnackPile(Chocolate, 10, 1m));
             snackMachine.InsertMoney(Dollar);
 
             snackMachine.BuySnack(1);
@@ -67,10 +67,10 @@ namespace DddInPractice.Tests
         }
 
         [Fact]
-        public void Cannot_male_purchase_if_not_enough_money_inserted()
+        public void Cannot_make_purchase_if_not_enough_money_inserted()
         {
             var snackMachine = new SnackMachine();
-            snackMachine.LoadSnacks(1, new SnackPile(new Snack("Some Snack"), 1, 2m));
+            snackMachine.LoadSnacks(1, new SnackPile(Chocolate, 1, 2m));
             snackMachine.InsertMoney(Dollar);
 
             Action action = () => snackMachine.BuySnack(1);
@@ -79,9 +79,9 @@ namespace DddInPractice.Tests
         }
 
         [Fact]
-        public void Snack_machine_returns_moeny_with_highest_denomination_first()
+        public void Snack_machine_returns_money_with_highest_denomination_first()
         {
-            var snackMachine = new SnackMachine();
+            SnackMachine snackMachine = new SnackMachine();
             snackMachine.LoadMoney(Dollar);
 
             snackMachine.InsertMoney(Quarter);
@@ -98,7 +98,7 @@ namespace DddInPractice.Tests
         public void After_purchase_change_is_returned()
         {
             var snackMachine = new SnackMachine();
-            snackMachine.LoadSnacks(1, new SnackPile(new Snack("Some Snack"), 1, 0.5m));
+            snackMachine.LoadSnacks(1, new SnackPile(Chocolate, 1, 0.5m));
             snackMachine.LoadMoney(TenCent * 10);
 
             snackMachine.InsertMoney(Dollar);
@@ -112,7 +112,7 @@ namespace DddInPractice.Tests
         public void Cannot_buy_snack_if_not_enough_change()
         {
             var snackMachine = new SnackMachine();
-            snackMachine.LoadSnacks(1, new SnackPile(new Snack("Some snack"), 1, 0.5m));
+            snackMachine.LoadSnacks(1, new SnackPile(Chocolate, 1, 0.5m));
             snackMachine.InsertMoney(Dollar);
 
             Action action = () => snackMachine.BuySnack(1);

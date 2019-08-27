@@ -1,5 +1,5 @@
-﻿using NHibernate.Proxy;
-using System;
+﻿using System;
+using NHibernate.Proxy;
 
 namespace DddInPractice.Logic
 {
