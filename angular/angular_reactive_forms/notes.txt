@@ -1,0 +1,7 @@
+2.1
+There are 2 types of forms in angular: template-driven and reactive.
+template uses 2 way data binding
+reative uses immutable data model
+	logic is in code rather than html template
+	which makes easier to unit test
+	and change the things dynamically
