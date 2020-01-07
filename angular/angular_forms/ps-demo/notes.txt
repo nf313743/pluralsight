@@ -1,0 +1,78 @@
+Angular Forms
+
+2.2
+reactive - better for unit testing
+Form validation
+
+3.2
+Import FormsModule in the app.module.ts
+
+3.3
+Create component. Add selector to the app.component.html
+Created form with ok button
+
+3.4
+Install Bootstrap:
+npm install --save bootstrap
+Add to angular.json:
+ "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+            ],
+When using form controls with bootstrap us div class="form-group" to give it Bootstrap styling
+<lable for="name" matches with <input id="name".  For focus.
+
+4.2
+NgForm - importing the module makes Angular take over forms
+	internal: <form NgForm></form>
+You can access it via #form variable: <form #form="ngForm"> then using {{form}}
+
+4.3
+When building a form the NgModel directive gets placed on every field that we want angular to know about.
+	e.g.  <input id="name" name="name" class="form-control" ngModel />
+ngModule comes from FormsModule
+
+4.4
+Created Data Model.  I.e. interface variable in the component.ts
+
+4.5
+ngModel
+	name attribute on control is required.
+2-way data binding using [(ngModel)]="userSettings.name"
+
+4.6
+You want to work with a copy of the settings and not the original in case the user cancels or navigates back etc
+To copy an interface you can use the spread operator: ...
+	userSettings: UserSettings = { ...this.originalUserSettings };
+	This is a shallow copy
+
+5.2
+Angular turns off native browser validation but you can enable it with <form #form="ngForm" ngNativeValidate>
+	Turned off because of the way different browers handle validation
+
+5.3
+ng-untouched - Field starts with this.
+ng-touched - Once lose focus this is applied
+ng-pristine - unmodified
+ng-dirty - modified - cannot go back to ng-pristine
+ng-valid - as long as value on input is valid.
+ng-invalid
+
+5.4
+NgModel properties are the same but without ng-.  e.g. ng-untouched = untouched
+
+5.6
+(ngSubmit)="onSubmit(form)" -- creates an event on form submission.  Form comes from template reference variable <form #form="ngForm"
+
+5.7
+Can also use HTML5 events such as (blur)="onBlur(nameField).  This will pass nameField of type NgModel
+
+6.2
+@injectable providedIn:'root' means we don't have to add the service to app module.  root means it spans the entire app.
+
+6.3 
+To make something Observable<T> easily use: return of(foo)
+You must use subscribe to do something with an observable
+
+6.5
+putsreq.com to fake http responses
