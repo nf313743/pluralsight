@@ -67,3 +67,12 @@ NgModel properties are the same but without ng-.  e.g. ng-untouched = untouched
 5.7
 Can also use HTML5 events such as (blur)="onBlur(nameField).  This will pass nameField of type NgModel
 
+6.2
+@injectable providedIn:'root' means we don't have to add the service to app module.  root means it spans the entire app.
+
+6.3 
+To make something Observable<T> easily use: return of(foo)
+You must use subscribe to do something with an observable
+
+6.5
+putsreq.com to fake http responses
