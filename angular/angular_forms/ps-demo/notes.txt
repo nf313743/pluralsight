@@ -1,0 +1,24 @@
+Angular Forms
+
+2.2
+reactive - better for unit testing
+Form validation
+
+3.2
+Import FormsModule in the app.module.ts
+
+3.3
+Create component. Add selector to the app.component.html
+Created form with ok button
+
+3.4
+Install Bootstrap:
+npm install --save bootstrap
+Add to angular.json:
+ "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+            ],
+When using form controls with bootstrap us div class="form-group" to give it Bootstrap styling
+<lable for="name" matches with <input id="name".  For focus.
+
