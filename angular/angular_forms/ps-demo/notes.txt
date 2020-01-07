@@ -22,3 +22,24 @@ Add to angular.json:
 When using form controls with bootstrap us div class="form-group" to give it Bootstrap styling
 <lable for="name" matches with <input id="name".  For focus.
 
+4.2
+NgForm - importing the module makes Angular take over forms
+	internal: <form NgForm></form>
+You can access it via #form variable: <form #form="ngForm"> then using {{form}}
+
+4.3
+When building a form the NgModel directive gets placed on every field that we want angular to know about.
+	e.g.  <input id="name" name="name" class="form-control" ngModel />
+ngModule comes from FormsModule
+
+4.4
+Created Data Model.  I.e. interface variable in the component.ts
+
+4.5
+2-way data binding using [(ngModel)]="userSettings.name"
+
+4.6
+You want to work with a copy of the settings and not the original in case the user cancels or navigates back etc
+To copy an interface you can use the spread operator: ...
+	userSettings: UserSettings = { ...this.originalUserSettings };
+	This is a shallow copy
