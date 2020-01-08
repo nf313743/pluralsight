@@ -39,3 +39,6 @@ You can watch a control change event using:
 6.4
 debounceTime - ignores events until a specific times has passed without another event
 	Usefule for validation messages not displaying straight away when a user enters a value in an input
+	
+7.6
+FormArray are used to hold a number of FormControls and/or FormGroups in an array.  These can then be accessed via an index.  And also expanded/reduced dynamically.
