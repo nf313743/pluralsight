@@ -28,3 +28,6 @@ Reavtives forms you create your own FormGroup and FormControls in the component 
 4.5
 To bind to FormGroup in the component: <form [formGroup]="customerForm">
 	This will tell Angular not to build its own form model but to use the one defined in the component
+	
+5
+Use nested FormGroup to apply validation across multiple contorls
