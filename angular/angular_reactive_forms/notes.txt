@@ -31,3 +31,11 @@ To bind to FormGroup in the component: <form [formGroup]="customerForm">
 	
 5
 Use nested FormGroup to apply validation across multiple contorls
+
+6.2
+You can watch a control change event using:
+	this.myControl.valueChanges.subscribe(value => console.log(value)) -- Subscribe to the observable
+	
+6.4
+debounceTime - ignores events until a specific times has passed without another event
+	Usefule for validation messages not displaying straight away when a user enters a value in an input
