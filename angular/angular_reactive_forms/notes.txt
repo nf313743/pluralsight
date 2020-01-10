@@ -42,3 +42,22 @@ debounceTime - ignores events until a specific times has passed without another 
 	
 7.6
 FormArray are used to hold a number of FormControls and/or FormGroups in an array.  These can then be accessed via an index.  And also expanded/reduced dynamically.
+
+8.5
+Routing guards are used  to control navigation
+<a [routerLink]="['products']"> -- Routing link
+
+8.6
+ActivateRoute service to get id from url
+
+9.4
+Use "angular-in-memory-web-api" to mock webapi in-memory.  Only need in devDependencies@NgModule({
+  imports: [
+    InMemoryWebApiModule.forRoot(ProductData),
+ProductData -> export class ProductData implements InMemoryDbService 
+createDb() -> this method will contain seed data.
+field 'id' is required for InMemoryDbService - when creating it needs to be set to null
+
+9.9
+Use this.form.reset() to remove dirty flag after saving.
+
