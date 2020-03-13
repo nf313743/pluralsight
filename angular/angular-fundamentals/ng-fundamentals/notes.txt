@@ -15,3 +15,8 @@ Imports - importing other modules
 
 To make image files statically available in your app this is an "assets"[] in angular.json
     "styles"[] and "scripts"[] are used for styles and scripts
+
+#thumbnail - template variables - allow access to public members of that component
+
+css styles defined in the component are scoped to the component
+
