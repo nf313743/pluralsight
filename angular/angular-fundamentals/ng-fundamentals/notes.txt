@@ -1,0 +1,17 @@
+From your root app the router will look at the supplied URL to determine what components and ub components to load
+
+Modules group component trees together so that they can be loaded independently
+
+Everything has to be registered in a modlue in order for it to be used.  Apart from Services which are registered in the root injector and are accessible throughout the application
+
+assets directory is for static files like images
+
+Webpack via the angular.json file loads main.js.  main.js is the main file used to load the angular app
+    main.ts will then load the AppModule
+
+Declarations - importing components
+Providers - importing services
+Imports - importing other modules
+
+To make image files statically available in your app this is an "assets"[] in angular.json
+    "styles"[] and "scripts"[] are used for styles and scripts
