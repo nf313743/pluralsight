@@ -20,3 +20,34 @@ To make image files statically available in your app this is an "assets"[] in an
 
 css styles defined in the component are scoped to the component
 
+############ Module 04
+{{interpolation}}
+[poperty binding]
+
+These are bounds by expressions
+
+Expressions should:
+    Have no side-effects
+    Be Fasts
+    Idempotent
+
+
+*ngFor - structural directive as it changes the ctructure of the html
+
+{{event?.name}} - Safe operation operator
+
+*ngIf - useful for hiding elements you know that aren't going to be rendered.  If an element could be rendered, i.e if someone selects a checkbox then the html hidden attribute is better for performance
+
+* ngSwitch="obj.prop" / *ngSwitchCase="" - Do something base on a value
+      <span *ngSwitchCase="'8:00 am'">Early start</span> 
+
+Class binding - [class.green]="event?.time === '8:00am'"
+    If the event time equals string then add the green class to this div
+
+ngClass used for multiple bindings.  Uses an object:
+       [ngClass]="{
+          green: event?.time === '8:00 am',
+          bold: event?.time === '8:00 am'
+        }"
+
+[ngStyle] - Bind css style
