@@ -55,3 +55,23 @@ ngClass used for multiple bindings.  Uses an object:
 
 ######## Module 05
 @Injectable needs to be added to services that will have other services injected into it
+
+
+#### Module 06 - Routing
+<router-outlet> - Used to display the resulting component from a route.
+
+RouterModule.forRoot(appRoutes) - gives you routing
+
+<base href="/"> - This tells angular that the app is hosted at the root. If it was hosted at localhost/something/else you'd need to change this value.
+
+ActivatedRoute - This pulls values from url
+
+[routerLink]="['/events', event.id]" - Create link via route.
+
+canActivate:[EventRouteActivator] - Check if a id in route is valid
+
+Q: whats the point of a resolver?
+
+When creating a feature module you import CommonModule.  The main app module with have BrowserModule
+When creating a feature module you use RouterModule.forChild rather than forRoot()
+loadChildren: "./user/user.module#UserModule" } - Load this module only when first navigated to
