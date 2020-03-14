@@ -51,3 +51,7 @@ ngClass used for multiple bindings.  Uses an object:
         }"
 
 [ngStyle] - Bind css style
+
+
+######## Module 05
+@Injectable needs to be added to services that will have other services injected into it
