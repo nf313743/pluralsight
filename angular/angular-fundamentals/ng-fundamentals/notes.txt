@@ -75,3 +75,15 @@ Q: whats the point of a resolver?
 When creating a feature module you import CommonModule.  The main app module with have BrowserModule
 When creating a feature module you use RouterModule.forChild rather than forRoot()
 loadChildren: "./user/user.module#UserModule" } - Load this module only when first navigated to
+
+
+
+
+###### Module 07 - Forms
+[(ngModel)] - Used in two way binding forms
+() in html forms denotes binding from html to component
+[] in html forms denotes binding from component to html
+
+!! - eg return !!this.currentUser;.  This will run the currentuser into a boolean value. NOT it ,and NOT it again.  Its as shortcut to get the truthy value of an object
+
+Providers (services) that are declared in the app module are available in all other modules.  This is not the same for imports or Declarations
