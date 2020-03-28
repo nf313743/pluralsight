@@ -94,3 +94,15 @@ Pipes are used for formatting only
 
 There are no built-in pipes for sorting and filtering. This is due to performance on changed detection.  This means you have to write your own.
 
+
+##### Module 11 - Dependency Injection
+Then you pass a class into a constructor you are passing an instance of that class.  When you define a normal variable as a type of class a constructor function of than class is used, not a shared instance.
+
+Injection token: Allows you to inject a 3rd party service into your angular app, without having to wrap on in a wrapper class, and replicate all the possible method calls.
+
+To inject a injector token: @Inject(TOASTR_TOKEN) private toastr: Toastr
+
+Registering a class for injection in the providers long-hand looks like:
+{ provider: EventRouteActivator, useClass: EventRouteActivator}
+    The injector token and the value are the same
+
