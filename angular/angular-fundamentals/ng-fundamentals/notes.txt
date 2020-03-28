@@ -87,3 +87,10 @@ loadChildren: "./user/user.module#UserModule" } - Load this module only when fir
 !! - eg return !!this.currentUser;.  This will run the currentuser into a boolean value. NOT it ,and NOT it again.  Its as shortcut to get the truthy value of an object
 
 Providers (services) that are declared in the app module are available in all other modules.  This is not the same for imports or Declarations
+
+
+######## Module 10 - Pipes
+Pipes are used for formatting only
+
+There are no built-in pipes for sorting and filtering. This is due to performance on changed detection.  This means you have to write your own.
+
