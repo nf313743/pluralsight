@@ -17,8 +17,8 @@ import { IEvent, ISession } from "../shared";
       a {
         cursor: pointer;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class EventDetailsComponent implements OnInit {
   event: IEvent;
@@ -32,7 +32,10 @@ export class EventDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.event = this.eventService.getEvent(+this.route.snapshot.params["id"]);
+    this.route.params.forEach((params) => {
+      this.event = this.eventService.getEvent(+params["id"]);
+      this.addMode = false;
+    });
   }
 
   addSession() {
@@ -42,7 +45,7 @@ export class EventDetailsComponent implements OnInit {
   saveNewSession(session: ISession) {
     const nextId = Math.max.apply(
       null,
-      this.event.sessions.map(x => x.id)
+      this.event.sessions.map((x) => x.id)
     );
     session.id = nextId + 1;
     this.event.sessions.push(session);

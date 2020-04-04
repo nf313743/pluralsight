@@ -106,3 +106,35 @@ Registering a class for injection in the providers long-hand looks like:
 { provider: EventRouteActivator, useClass: EventRouteActivator}
     The injector token and the value are the same
 
+
+#### Module 12 - Directives and Advanced Components
+(ngSubmit) - An event Angular adds into forms.  Fired on submit buttin click or hitting enter
+
+EventEmitter can be used to simulate a return of type Observable from a method.
+
+[routerLink]="["events"] - this is a relative routing link.  To make it work from anyway in the app you add / : [routerLink]="["/events"]
+
+Bootstrap model components need an id
+
+Directives are attriutes within HTML tags.  Attach new functionality to existing DOM nodes
+Use ElementRef to get reference of node that Directive is applied to
+
+ng-content:
+    From the calling component you can use the default content or specify selector content.
+    <simple-modal title="Matching Sessions">
+        All of my content will be in the <ng-content> defined in simpleModel.component
+    </simple-modal>
+
+    <collapsible-well>
+      <div well-title>
+        This content will go into <ng-content select="[well-title]></ng-content>
+      </div>
+      <div well-body>
+        This content will go into <ng-content select="[well-body]></ng-content>
+      </div>
+    </collapsible-well>
+
+@Input('model-trigger') modalId:string - this creates an alias for model-trigger as dashes are not allowed
+
+@ViewChild("modalcontainer") can used to hold a Element ref of <div #modalcontainer></div>
+
