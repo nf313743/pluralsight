@@ -16,6 +16,9 @@ import {
   CreateSessionComponent,
   SessionListComponent,
   DurationPipe,
+  UpvoteComponent,
+  VoterService,
+  LocationValidator,
 } from "./events/index";
 import {
   JQ_TOKEN,
@@ -52,7 +55,9 @@ let jQuery = window["$"];
     CollapsibleWellComponent,
     DurationPipe,
     SimpleModalComponent,
-    ModalTriggerDirective
+    ModalTriggerDirective,
+    UpvoteComponent,
+    LocationValidator,
   ],
   providers: [
     EventService,
@@ -67,6 +72,7 @@ let jQuery = window["$"];
       provide: JQ_TOKEN,
       useValue: jQuery,
     },
+    VoterService,
   ],
   bootstrap: [EventsAppComponent],
 })

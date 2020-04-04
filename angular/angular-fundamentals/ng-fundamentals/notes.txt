@@ -138,3 +138,9 @@ ng-content:
 
 @ViewChild("modalcontainer") can used to hold a Element ref of <div #modalcontainer></div>
 
+
+
+##### Module 13 - More Componenets and Validators
+Add custom validators to NG_VALIDATORS
+
+
