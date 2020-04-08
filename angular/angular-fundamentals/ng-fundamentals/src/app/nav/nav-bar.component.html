@@ -25,8 +25,8 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li>
-              <a href="">Angular Connect</a>
+            <li *ngFor="let event of events">
+              <a [routerLink]="['/events', event.id]">{{ event.name }}</a>
             </li>
           </ul>
         </li>
@@ -69,7 +69,11 @@
   </div>
 </div>
 
-<simple-modal closeOnBodyClick="true" elementId="searchResults" title="Matching Sessions">
+<simple-modal
+  closeOnBodyClick="true"
+  elementId="searchResults"
+  title="Matching Sessions"
+>
   <div class="list-group">
     <a
       class="list-group-item"
