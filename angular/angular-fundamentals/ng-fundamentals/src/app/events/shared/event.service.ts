@@ -1,54 +1,46 @@
 import { Injectable, EventEmitter } from "@angular/core";
-import { Subject, Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { IEvent } from ".";
 import { ISession } from "./event.model";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { catchError } from "rxjs/operators";
 
 @Injectable()
 export class EventService {
+  constructor(private http: HttpClient) {}
+
   getEvents(): Observable<IEvent[]> {
-    let subject = new Subject<IEvent[]>();
-
-    setTimeout(() => {
-      subject.next(this.EVENTS);
-      subject.complete();
-    }, 100);
-
-    return subject;
+    return this.http
+      .get<IEvent[]>("/api/events")
+      .pipe(catchError(this.handleError<IEvent[]>([])));
   }
 
-  getEvent(id: number): IEvent {
-    return this.EVENTS.find((x) => x.id === id);
+  getEvent(id: number): Observable<IEvent> {
+    return this.http
+      .get<IEvent>("/api/events/" + id)
+      .pipe(catchError(this.handleError<IEvent>()));
   }
 
-  saveEvent(event: IEvent) {
-    event.id = 999;
-    event.sessions = [];
-    this.EVENTS.push(event);
+  saveEvent(event) {
+    let options = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
+    };
+    return this.http
+      .post<IEvent>("/api/events", event, options)
+      .pipe(catchError(this.handleError<IEvent>()));
   }
 
-  updateEvent(event: IEvent) {
-    const index = this.EVENTS.findIndex((x) => x.id === event.id);
-    this.EVENTS[index] = event;
+  private handleError<T>(result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
   }
 
-  searchSessions(searchTerm: string) {
-    const term = searchTerm.toLocaleLowerCase();
-    let results: ISession[] = [];
-
-    this.EVENTS.forEach((event) => {
-      let matchingSessions = event.sessions.filter(
-        (session) => session.name.toLocaleLowerCase().indexOf(term) > -1
-      );
-      matchingSessions = matchingSessions.map((session: any) => {
-        session.eventId = event.id;
-        return session;
-      });
-      results = results.concat(matchingSessions);
-    });
-
-    var emitter = new EventEmitter(true);
-    setTimeout(() => emitter.emit(results), 100);
-    return emitter;
+  searchSessions(searchTerm: string): Observable<ISession[]> {
+    return this.http
+      .get<ISession[]>("/api/sessions/search?search=" + searchTerm)
+      .pipe(catchError(this.handleError<ISession[]>([])));
   }
 
   EVENTS: IEvent[] = [

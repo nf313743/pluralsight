@@ -26,20 +26,23 @@ import { EventService, IEvent } from "./shared";
       .error :ms-input-placeholder {
         color: #999;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class CreateEventComponent {
   constructor(private router: Router, private eventService: EventService) {}
 
   newEvent: IEvent;
+  isDirty = false;
 
   cancel() {
     this.router.navigate(["/events"]);
   }
 
   saveEvent(formValues) {
-    this.eventService.saveEvent(formValues);
-    this.router.navigate(["/events"]);
+    this.eventService.saveEvent(formValues).subscribe(() => {
+      this.isDirty = false;
+      this.router.navigate(["/events"]);
+    });
   }
 }

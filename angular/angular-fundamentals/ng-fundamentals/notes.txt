@@ -144,3 +144,7 @@ ng-content:
 Add custom validators to NG_VALIDATORS
 
 
+#### Module 14 - Http
+Resolvers - if a Observable is returned from resolve() then resolver will automatically subscribe
+
+With Observables if nothing subscribes to it the http call will not happen

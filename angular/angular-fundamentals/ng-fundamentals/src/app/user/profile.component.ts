@@ -28,8 +28,8 @@ import { TOASTR_TOKEN, Toastr } from "../common/toastr.service";
       .error :ms-input-placeholder {
         color: #999;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.firstName = new FormControl(this.authService.currentUser.firstName, [
       Validators.required,
-      Validators.pattern("[a-zA-Z].*")
+      Validators.pattern("[a-zA-Z].*"),
     ]);
     this.lastName = new FormControl(
       this.authService.currentUser.lastName,
@@ -52,18 +52,24 @@ export class ProfileComponent implements OnInit {
     );
     this.profileForm = new FormGroup({
       firstName: this.firstName,
-      lastName: this.lastName
+      lastName: this.lastName,
     });
   }
 
   saveProfile(formValues) {
     if (this.profileForm.valid) {
-      this.authService.updateCurrentUser(
-        formValues.firstName,
-        formValues.lastName
-      );
-      this.toastr.success("Profile Saved");
+      this.authService
+        .updateCurrentUser(formValues.firstName, formValues.lastName)
+        .subscribe(() => {
+          this.toastr.success("Profile Saved");
+        });
     }
+  }
+
+  logout() {
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(["/user/login"]);
+    });
   }
 
   cancel(): void {

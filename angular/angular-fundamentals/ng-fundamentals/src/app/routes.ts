@@ -5,25 +5,25 @@ import {
   EventsListComponent,
   EventDetailsComponent,
   CreateEventComponent,
-  EventRouteActivator,
   EventListResolver,
-  CreateSessionComponent
+  CreateSessionComponent,
 } from "./events/index";
+import { EventResolver } from "./events/event-resolver.service";
 
 export const appRoutes: Routes = [
   { path: "events/new", component: CreateEventComponent },
   {
     path: "events",
     component: EventsListComponent,
-    resolve: { events: EventListResolver }
+    resolve: { events: EventListResolver },
   },
   {
     path: "events/:id",
     component: EventDetailsComponent,
-    canActivate: [EventRouteActivator]
+    resolve: { event: EventResolver },
   },
   { path: "events/session/new", component: CreateSessionComponent },
   { path: "404", component: Error404Component },
   { path: "", redirectTo: "/events", pathMatch: "full" },
-  { path: "user", loadChildren: "./user/user.module#UserModule" }
+  { path: "user", loadChildren: "./user/user.module#UserModule" },
 ];
