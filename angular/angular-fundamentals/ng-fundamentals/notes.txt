@@ -155,3 +155,11 @@ Isolated test - no template
 Integrated test - with template
   Deep - test multiple components together
   Shallow - only one component tested 
+
+## Module 16 - Integrated tests
+Component and Template are executed within a TestBed
+ComponentFixture acts as a wrapper around the Component under test
+DebugElement helps test HTMLElement - HTMLElement uses raw DOM, DebugElement uses Angular.  Both achieve the same thing. DebugElement has some more things.
+
+NO_ERRORS_SCHEMA - "Don't worry about HTML elements and components you don't recognise during the test".  Saves mocking out a load of functionality
+
