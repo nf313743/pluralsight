@@ -7,19 +7,19 @@
     autocomplete="off"
   >
     <div class="form-group">
-      <label for="userName">User Name:</label
+      <label for="username">User Name:</label
       ><em
         *ngIf="
-          loginForm.controls.userName?.invalid &&
-          (loginForm.controls.userName?.touched || mouseoverLogin)
+          loginForm.controls.username?.invalid &&
+          (loginForm.controls.username?.touched || mouseoverLogin)
         "
         >Required</em
       >
       <input
-        (ngModel)="(userName)"
-        name="userName"
+        (ngModel)="(username)"
+        name="username"
         required
-        id="userName"
+        id="username"
         type="text"
         class="form-control"
         placeholder="User Name..."

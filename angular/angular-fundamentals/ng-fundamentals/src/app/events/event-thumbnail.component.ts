@@ -14,7 +14,7 @@ import { IEvent } from ".";
         <span *ngSwitchDefault>(Normal start)</span>
       </div>
       <div>Price: {{ event.price | currency: "USD" }}</div>
-      <div *ngIf="event?.Location">
+      <div *ngIf="event?.location">
         <span>Location: {{ event?.location?.address }}</span>
         <span class="pad-left"
           >{{ event?.location?.city }}, {{ event?.location?.country }}</span
@@ -34,8 +34,8 @@ import { IEvent } from ".";
       .well div {
         color: #bbb;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class EventThumbnailComponent {
   @Input() event: IEvent;
