@@ -148,3 +148,10 @@ Add custom validators to NG_VALIDATORS
 Resolvers - if a Observable is returned from resolve() then resolver will automatically subscribe
 
 With Observables if nothing subscribes to it the http call will not happen
+
+
+## Module 15 - Unit testing
+Isolated test - no template
+Integrated test - with template
+  Deep - test multiple components together
+  Shallow - only one component tested 
