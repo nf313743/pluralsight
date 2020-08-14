@@ -1,0 +1,18 @@
+@model IEnumerable<MenuItem>
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Popular Brews <small>as of @DateTime.Now</small> </h2>
+        @foreach (var item in Model)
+        {
+            <div>
+                <span class="card-text text-success">@item.Name</span> 
+                - @item.Summary.Substring(0, 20);
+           </div>
+        }
+                
+        <div class="card-footer">
+            <a href="#" class="btn btn-success">Full Menu</a>
+        </div>
+    </div>
+</div>

@@ -77,38 +77,11 @@
     <hr class="mb-5">
     <div class="row">
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h2>Download our App</h2>
-                    <div class="description">
-                        <p>Stay wired on the go with these benefits:</p>
-                        <ul>
-                            <li>Coupons and promotions</li>
-                            <li>Brainiacs club benefits</li>
-                            <li>Store locator</li>
-                            <li>Latest menu options</li>
-                        </ul>
-                    </div>
-                    <img class="img-fluid rounded" src="~/images/download-small.png" alt="">
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-success">Download</a>
-                </div>
-            </div>
+            <partial name="MobileWidget" model="@("Download Today!")" />
         </div>
         <div class="col-md-4">
             <cache>
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Popular Brews <small>as of @DateTime.Now</small> </h2>
-                        <p><span class="card-text text-success">Pumpkin Latte</span> - A refreshing pumpkin flavored drink, with a hint of mocha and spice. <i>350 calories</i><i> $3.49</i></p>
-                        <p><span class="card-text text-success">Light Mocha</span> - All the mocha flavoring with just a few of the calories. <i>100 calories</i><i> $2.99</i></p>
-                        <p><span class="card-text text-success">Vanilla Cappucino</span> - The natural sweetness of vanilla ensures minimal sugar and calories. <i>150 calories</i><i> $3.99</i></p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-success">Full Menu</a>
-                    </div>
-                </div>
+                <vc:popular-brews count="2" />
             </cache>
         </div>
         <div class="col-md-4">

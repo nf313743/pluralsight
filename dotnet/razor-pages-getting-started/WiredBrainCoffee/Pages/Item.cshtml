@@ -40,6 +40,8 @@
                     </ul>
                 </div>
             </div>
+            <hr />
+            @await Component.InvokeAsync("PopularBrews", new {count = 3})
         </div>
     </div>
 </div>
