@@ -15,14 +15,16 @@ namespace WiredBrainCoffee.Services
                 new MenuItem()
                 {
                     Id = 1,
+                    Slug = "pumpkin-bread",
                     Name = "Frosted Pumpkin Bread",
                     Summary = "A seasonal delight we offer every autumn.  Pumpking bread with just a bit of spice, cream cheese frosting with just a hint of home.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-                    ImageFile = "pumpkinbread.png"
+                    ImageFile = "PumpkinBread.png"
                 },
                 new MenuItem()
                 {
                     Id = 2,
+                    Slug = "ground-coffee",
                     Name = "Ground to Go",
                     Summary = "Love our coffee? Take it with you so you never have to be without!",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",

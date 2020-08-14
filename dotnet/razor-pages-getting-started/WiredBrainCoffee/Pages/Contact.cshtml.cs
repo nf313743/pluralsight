@@ -16,19 +16,22 @@ namespace WiredBrainCoffee.Pages
         {
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {
                 EmailService.SendEmail(Contact);
-                Message = "Your message has been sent";
+                return new RedirectToPageResult("Confirmation", "Contact");
             }
+
+            return Page();
         }
 
-        public void OnPostSubscribe(string address)
+        public IActionResult OnPostSubscribe(string address)
         {
             EmailService.SendEmail(address);
             Message = "You have been added to the mailing list";
+            return new RedirectToPageResult("Confirmation", "Subscribe");
         }
     }
 }

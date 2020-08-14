@@ -1,6 +1,8 @@
 ﻿@page
 @model ContactModel
-@{ ViewData["Title"] = "Contact"; }
+@{
+    ViewData["Title"] = "Contact";
+}
 
 <div class="container">
     <h1 class="mt-4 mb-3">
@@ -8,40 +10,39 @@
         <small>We'd love to hear from you.</small>
     </h1>
     <hr />
-    @if (!string.IsNullOrEmpty(Model.Message))
-    {
+    @if (!string.IsNullOrEmpty(Model.Message)) {
         <div class="alert alert-success">@Model.Message</div>
     }
     <div class="row">
         <div class="col-md-8 mb-4">
             <p>Life gets busy but we try to respond with 24 hours.  If you have a more immediate question, give us a ring using the number over on the right. We are crazy friendly!</p>
             <br />
-            <form asp-page="Contact" method="post">
+            <form asp-page="Contact" method="post" name="sentMessage" id="contactForm">
                 <div class="control-group form-group">
                     <div class="controls">
                         <label asp-for="Contact.Name">Name:</label>
-                        <input asp-for="Contact.Name" class="form-control" />
+                        <input asp-for="Contact.Name" class="form-control">
                         <span asp-validation-for="Contact.Name"></span>
                     </div>
                 </div>
                 <div class="control-group form-group">
                     <div class="controls">
-                        <label asp-for="Contact.Phone">Phone Number:</label>
-                        <input asp-for="Contact.Phone" class="form-control" />
+                        <label asp-for="Contact.Phone">Phone:</label>
+                        <input asp-for="Contact.Phone" class="form-control">
                         <span asp-validation-for="Contact.Phone"></span>
                     </div>
                 </div>
                 <div class="control-group form-group">
                     <div class="controls">
                         <label asp-for="Contact.Email">Email:</label>
-                        <input asp-for="Contact.Email" class="form-control" />
+                        <input asp-for="Contact.Email" class="form-control">
                         <span asp-validation-for="Contact.Email"></span>
                     </div>
                 </div>
                 <div class="control-group form-group">
                     <div class="controls">
                         <label asp-for="Contact.Message">Message:</label>
-                        <textarea rows="10" cols="100" asp-for="Contact.Message"></textarea>
+                        <textarea asp-for="Contact.Message" rows="10" cols="100" class="form-control"></textarea>
                         <span asp-validation-for="Contact.Message"></span>
                     </div>
                 </div>
@@ -62,6 +63,8 @@
                     </div>
                 </form>
             </div>
+            <hr />
+            
             <hr />
             <div>
                 <h3>Contact Details</h3>

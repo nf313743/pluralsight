@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace WiredBrainCoffee
 {
@@ -21,15 +23,24 @@ namespace WiredBrainCoffee
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddRazorPages().AddRazorPagesOptions(x =>
+            {
+                x.Conventions.AddPageRoute("/index", "home");
+                x.Conventions.AddPageRoute("/index", "wired");
+            });
+
+            services.Configure<RouteOptions>(x =>
+            {
+                x.ConstraintMap.Add("promo", typeof(PromoConstraint));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
+                //app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -37,9 +48,16 @@ namespace WiredBrainCoffee
                 app.UseExceptionHandler("/Error");
             }
 
+
             app.UseStaticFiles();
 
-            app.UseMvc();
+            app.UseRouting();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+            });
         }
     }
 }

@@ -12,10 +12,10 @@ namespace WiredBrainCoffee.Pages
     {
         public MenuItem Item { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(string slug)
         {
             var menuService = new MenuService();
-            Item = menuService.GetMenuItems().FirstOrDefault(x => x.Id == id);
+            Item = menuService.GetMenuItems().FirstOrDefault(x => x.Slug == slug);
         }
     }
 }
