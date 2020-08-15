@@ -7,10 +7,16 @@ namespace WiredBrainCoffee
 {
     public class PopularBrews : ViewComponent
     {
+        private IMenuService _menuService;
+
+        public PopularBrews(IMenuService menuService)
+        {
+            _menuService = menuService;
+        }
+
         public Task<IViewComponentResult> InvokeAsync(int count)
         {
-            var menu = new MenuService();
-            var result = menu.GetMenuItems().Take(count);
+            var result = _menuService.GetMenuItems().Take(count);
             return Task.FromResult<IViewComponentResult>(View(result));
         }
 
