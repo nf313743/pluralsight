@@ -1,4 +1,6 @@
-﻿using CoreCodeCamp.Data;
+﻿using System.Reflection;
+using AutoMapper;
+using CoreCodeCamp.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,7 @@ namespace CoreCodeCamp
             services.AddScoped<ICampRepository, CampRepository>();
 
             services.AddControllers();
+            services.AddAutoMapper(Assembly.GetEntryAssembly());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
