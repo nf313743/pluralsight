@@ -7,7 +7,10 @@ namespace CoreCodeCamp.Data
     {
         public TalkProfile()
         {
-            CreateMap<Talk, TalkModel>();
+            CreateMap<Talk, TalkModel>()
+                .ReverseMap()
+                .ForMember(x => x.Camp, opt => opt.Ignore())
+                .ForMember(x => x.Speaker, opt => opt.Ignore());
         }
     }
 }
