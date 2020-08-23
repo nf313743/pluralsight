@@ -10,17 +10,16 @@ using Microsoft.AspNetCore.Routing;
 
 namespace CoreCodeCamp.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiVersion("1.0")]
-    [ApiVersion("1.1")]
+    [Route("api/camps")]
+    [ApiVersion("2.0")]
     [ApiController]
-    public class CampsController : ControllerBase
+    public class Camps2Controller : ControllerBase
     {
         private readonly LinkGenerator _linkGenerator;
         private readonly IMapper _mapper;
         private readonly ICampRepository _repository;
 
-        public CampsController(
+        public Camps2Controller(
             ICampRepository repository,
             IMapper mapper,
             LinkGenerator linkGenerator)
@@ -58,12 +57,17 @@ namespace CoreCodeCamp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<CampModel[]>> Get(bool includeTalks = false)
+        public async Task<IActionResult> Get(bool includeTalks = false)
         {
             try
             {
                 var results = await _repository.GetAllCampsAsync(includeTalks);
-                return _mapper.Map<CampModel[]>(results);
+                var result = new
+                {
+                    Count = results.Count(),
+                    Results = _mapper.Map<CampModel[]>(results)
+                };
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -72,32 +76,11 @@ namespace CoreCodeCamp.Controllers
         }
 
         [HttpGet("{moniker}")]
-        [ApiVersion("1.0")]
         public async Task<ActionResult<CampModel>> Get(string moniker)
         {
             try
             {
                 var result = await _repository.GetCampAsync(moniker);
-
-                if (result == null)
-                {
-                    return NotFound();
-                }
-
-                return _mapper.Map<CampModel>(result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Database failure");
-            }
-        }
-
-        [HttpGet("{moniker}")]
-        public async Task<ActionResult<CampModel>> Get11(string moniker)
-        {
-            try
-            {
-                var result = await _repository.GetCampAsync(moniker, true);
 
                 if (result == null)
                 {
