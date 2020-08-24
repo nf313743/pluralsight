@@ -41,7 +41,8 @@ namespace Movies.API
                 // position 0
                 //options.OutputFormatters.Insert(0, new XmlSerializerOutputFormatter());
                 //options.InputFormatters.Insert(0, new XmlSerializerInputFormatter(options));
-            });
+            })
+                .AddNewtonsoftJson();
 
             // add support for compressing responses (eg gzip)
             services.AddResponseCompression();
@@ -70,8 +71,6 @@ namespace Movies.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Movies API", Version = "v1" });
             });
-
-            //services.AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

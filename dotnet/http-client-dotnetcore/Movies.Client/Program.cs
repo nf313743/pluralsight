@@ -7,26 +7,25 @@ using System.Threading.Tasks;
 
 namespace Movies.Client
 {
-    class Program
+    internal class Program
     {
- 
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
-            // create a new ServiceCollection 
+            // create a new ServiceCollection
             var serviceCollection = new ServiceCollection();
 
             ConfigureServices(serviceCollection);
 
             // create a new ServiceProvider
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            
-            // For demo purposes: overall catch-all to log any exception that might 
-            // happen to the console & wait for key input afterwards so we can easily 
-            // inspect the issue.  
+
+            // For demo purposes: overall catch-all to log any exception that might
+            // happen to the console & wait for key input afterwards so we can easily
+            // inspect the issue.
             try
             {
                 // Run our IntegrationService containing all samples and
-                // await this call to ensure the application doesn't 
+                // await this call to ensure the application doesn't
                 // prematurely exit.
                 await serviceProvider.GetService<IIntegrationService>().Run();
             }
@@ -34,30 +33,30 @@ namespace Movies.Client
             {
                 // log the exception
                 var logger = serviceProvider.GetService<ILogger<Program>>();
-                logger.LogError(generalException, 
+                logger.LogError(generalException,
                     "An exception happened while running the integration service.");
             }
-            
+
             Console.ReadKey();
         }
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            // // add loggers           
+            // // add loggers
             // serviceCollection.AddSingleton(new LoggerFactory()
             //       .AddConsole()
             //       .AddDebug());
 
-            serviceCollection.AddLogging(x=> x.AddConsole().AddDebug());
+            serviceCollection.AddLogging(x => x.AddConsole().AddDebug());
 
-            // register the integration service on our container with a 
+            // register the integration service on our container with a
             // scoped lifetime
 
             // For the CRUD demos
-            serviceCollection.AddScoped<IIntegrationService, CRUDService>();
+            //serviceCollection.AddScoped<IIntegrationService, CRUDService>();
 
             // For the partial update demos
-            // serviceCollection.AddScoped<IIntegrationService, PartialUpdateService>();
+            serviceCollection.AddScoped<IIntegrationService, PartialUpdateService>();
 
             // For the stream demos
             // serviceCollection.AddScoped<IIntegrationService, StreamService>();
@@ -72,7 +71,7 @@ namespace Movies.Client
             // serviceCollection.AddScoped<IIntegrationService, DealingWithErrorsAndFaultsService>();
 
             // For the custom http handlers demos
-            // serviceCollection.AddScoped<IIntegrationService, HttpHandlersService>();     
+            // serviceCollection.AddScoped<IIntegrationService, HttpHandlersService>();
         }
     }
 }
