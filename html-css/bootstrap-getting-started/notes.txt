@@ -1,0 +1,6 @@
+# Module 02
+
+	bootstrap-grid.css - If you only need the grid layout
+	bootstrap.bundle.js - Contains pooper
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		This is required for Bootstrap to resize and be responsive
