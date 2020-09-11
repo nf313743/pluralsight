@@ -18,4 +18,6 @@
 	<div class="col-md-8 col-sm-4>
 		Depending on the screen size one of the sizings above will be applied
 
-	
+# Module 04 - Add style with bootstrap
+    <div class="table-responsive">
+        If table cannot fit on page scroll bars are added.
