@@ -21,3 +21,4 @@
 # Module 04 - Add style with bootstrap
     <div class="table-responsive">
         If table cannot fit on page scroll bars are added.
+
