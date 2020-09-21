@@ -1,0 +1,24 @@
+# Module 02
+
+	bootstrap-grid.css - If you only need the grid layout
+	bootstrap.bundle.js - Contains pooper
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		This is required for Bootstrap to resize and be responsive
+	m-4
+		Margin
+
+# Module 03 - Grid
+
+	Containers contain rows, and rows contain columns
+
+	Each row has 12 columns
+
+	Breakpoints are used to resize the columns depending on the screen size
+
+	<div class="col-md-8 col-sm-4>
+		Depending on the screen size one of the sizings above will be applied
+
+# Module 04 - Add style with bootstrap
+    <div class="table-responsive">
+        If table cannot fit on page scroll bars are added.
+
