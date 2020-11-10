@@ -1,0 +1,165 @@
+From your root app the router will look at the supplied URL to determine what components and ub components to load
+
+Modules group component trees together so that they can be loaded independently
+
+Everything has to be registered in a modlue in order for it to be used.  Apart from Services which are registered in the root injector and are accessible throughout the application
+
+assets directory is for static files like images
+
+Webpack via the angular.json file loads main.js.  main.js is the main file used to load the angular app
+    main.ts will then load the AppModule
+
+Declarations - importing components
+Providers - importing services
+Imports - importing other modules
+
+To make image files statically available in your app this is an "assets"[] in angular.json
+    "styles"[] and "scripts"[] are used for styles and scripts
+
+#thumbnail - template variables - allow access to public members of that component
+
+css styles defined in the component are scoped to the component
+
+############ Module 04
+{{interpolation}}
+[poperty binding]
+
+These are bounds by expressions
+
+Expressions should:
+    Have no side-effects
+    Be Fasts
+    Idempotent
+
+
+*ngFor - structural directive as it changes the ctructure of the html
+
+{{event?.name}} - Safe operation operator
+
+*ngIf - useful for hiding elements you know that aren't going to be rendered.  If an element could be rendered, i.e if someone selects a checkbox then the html hidden attribute is better for performance
+
+* ngSwitch="obj.prop" / *ngSwitchCase="" - Do something base on a value
+      <span *ngSwitchCase="'8:00 am'">Early start</span> 
+
+Class binding - [class.green]="event?.time === '8:00am'"
+    If the event time equals string then add the green class to this div
+
+ngClass used for multiple bindings.  Uses an object:
+       [ngClass]="{
+          green: event?.time === '8:00 am',
+          bold: event?.time === '8:00 am'
+        }"
+
+[ngStyle] - Bind css style
+
+
+######## Module 05
+@Injectable needs to be added to services that will have other services injected into it
+
+
+#### Module 06 - Routing
+<router-outlet> - Used to display the resulting component from a route.
+
+RouterModule.forRoot(appRoutes) - gives you routing
+
+<base href="/"> - This tells angular that the app is hosted at the root. If it was hosted at localhost/something/else you'd need to change this value.
+
+ActivatedRoute - This pulls values from url
+
+[routerLink]="['/events', event.id]" - Create link via route.
+
+canActivate:[EventRouteActivator] - Check if a id in route is valid
+
+Q: whats the point of a resolver?
+
+When creating a feature module you import CommonModule.  The main app module with have BrowserModule
+When creating a feature module you use RouterModule.forChild rather than forRoot()
+loadChildren: "./user/user.module#UserModule" } - Load this module only when first navigated to
+
+
+
+
+###### Module 07 - Forms
+[(ngModel)] - Used in two way binding forms
+() in html forms denotes binding from html to component
+[] in html forms denotes binding from component to html
+
+!! - eg return !!this.currentUser;.  This will run the currentuser into a boolean value. NOT it ,and NOT it again.  Its as shortcut to get the truthy value of an object
+
+Providers (services) that are declared in the app module are available in all other modules.  This is not the same for imports or Declarations
+
+
+######## Module 10 - Pipes
+Pipes are used for formatting only
+
+There are no built-in pipes for sorting and filtering. This is due to performance on changed detection.  This means you have to write your own.
+
+
+##### Module 11 - Dependency Injection
+Then you pass a class into a constructor you are passing an instance of that class.  When you define a normal variable as a type of class a constructor function of than class is used, not a shared instance.
+
+Injection token: Allows you to inject a 3rd party service into your angular app, without having to wrap on in a wrapper class, and replicate all the possible method calls.
+
+To inject a injector token: @Inject(TOASTR_TOKEN) private toastr: Toastr
+
+Registering a class for injection in the providers long-hand looks like:
+{ provider: EventRouteActivator, useClass: EventRouteActivator}
+    The injector token and the value are the same
+
+
+#### Module 12 - Directives and Advanced Components
+(ngSubmit) - An event Angular adds into forms.  Fired on submit buttin click or hitting enter
+
+EventEmitter can be used to simulate a return of type Observable from a method.
+
+[routerLink]="["events"] - this is a relative routing link.  To make it work from anyway in the app you add / : [routerLink]="["/events"]
+
+Bootstrap model components need an id
+
+Directives are attriutes within HTML tags.  Attach new functionality to existing DOM nodes
+Use ElementRef to get reference of node that Directive is applied to
+
+ng-content:
+    From the calling component you can use the default content or specify selector content.
+    <simple-modal title="Matching Sessions">
+        All of my content will be in the <ng-content> defined in simpleModel.component
+    </simple-modal>
+
+    <collapsible-well>
+      <div well-title>
+        This content will go into <ng-content select="[well-title]></ng-content>
+      </div>
+      <div well-body>
+        This content will go into <ng-content select="[well-body]></ng-content>
+      </div>
+    </collapsible-well>
+
+@Input('model-trigger') modalId:string - this creates an alias for model-trigger as dashes are not allowed
+
+@ViewChild("modalcontainer") can used to hold a Element ref of <div #modalcontainer></div>
+
+
+
+##### Module 13 - More Componenets and Validators
+Add custom validators to NG_VALIDATORS
+
+
+#### Module 14 - Http
+Resolvers - if a Observable is returned from resolve() then resolver will automatically subscribe
+
+With Observables if nothing subscribes to it the http call will not happen
+
+
+## Module 15 - Unit testing
+Isolated test - no template
+Integrated test - with template
+  Deep - test multiple components together
+  Shallow - only one component tested 
+
+## Module 16 - Integrated tests
+Component and Template are executed within a TestBed
+ComponentFixture acts as a wrapper around the Component under test
+DebugElement helps test HTMLElement - HTMLElement uses raw DOM, DebugElement uses Angular.  Both achieve the same thing. DebugElement has some more things.
+
+NO_ERRORS_SCHEMA - "Don't worry about HTML elements and components you don't recognise during the test".  Saves mocking out a load of functionality
+
