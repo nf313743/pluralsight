@@ -12,7 +12,7 @@
             (change)="onSelected($event.target.value)"
           >
             <option value="0">- Display All -</option>
-            <option *ngFor="let category of categories" [value]="category.id">
+            <option *ngFor="let category of categories$ | async" [value]="category.id">
               {{ category.name }}
             </option>
           </select>
@@ -40,7 +40,7 @@
             <th>In Stock</th>
           </tr>
         </thead>
-        <tbody *ngFor="let product of products$ | async as products">
+        <tbody *ngFor="let product of products">
           <tr>
             <td>{{ product.productName }}</td>
             <td>{{ product.productCode }}</td>
