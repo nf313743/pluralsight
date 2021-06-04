@@ -1,0 +1,120 @@
+RxJS in Angular: Reactive Development
+
+Mange data as it flows through time
+* Collect
+* Pipe through set of opertations
+    -Transform
+    -Filter
+    -Process
+* Combine
+
+Can combine/compose data from several sources
+Uses push model what actions occur
+Lazy
+
+M3
+Stream starts on Subscribe
+Obeserver has three methods
+    next
+    error
+    complete
+Stream stops on unsubsctribe
+
+An Observer observes the stream and responds to its notifications
+
+Observerable Stream aka Observerable aka stream
+
+Unsubscribe stops the stream but does not call observer's complete method
+
+of('hello', 'there') - Creates Observerable
+from([hello, there]) - Creates Observerable from collection
+
+M4
+Apply operators using the pipe method
+of(2, 4, 6)
+    .pipe(
+        .map(item => item * 2)
+        .map(item => item - 3)
+    ).subscribe(console.log)
+In this example 2 goes through the entire pipeline before 4 is operated on
+
+
+M5
+
+products$ = this.productService.products$.pipe(
+is better than
+this.products$ = this.productService.getProducts().pipe(
+
+As you work with the stream directly rather than work with a stream returned from a method.  Don't need to do the OnInit too
+
+
+M7
+combineLatest:
+    Eg three streams it will give you an idea from all streams each time any item in one of the streams is emitted.  All streams must have emitted at least one value before function can emit
+    
+forkJoin
+    Eg three streams it will give you last values emitted from all three streams (completed) - not the latest.  Only use when streams will complete, like http.
+
+withLastestFrom    
+    Like combineLatest but only emits when 'source stream' emits.  E.g. steam a, b, c and a is the source. Only emit when all streams have emitted at least once, and will only emit after when source a emmits
+    Reacts to changes in only one stream
+    
+
+    
+M8
+Use startWith or BehaviorSubject when you want a stream to have a default value
+Subject is both an Observable stream and an Observer
+BehaviorSubject is like Subject but has initial value
+
+  private productSelectedSubject = new BehaviorSubject<number>(0);
+  productSelectedAction$ = this.productSelectedSubject.asObservable();
+  
+ productSelectedSubject - is the stream you add to
+ productSelectedAction$ emits when something happens to the stream
+ 
+ eg
+ 
+  private productSelectedSubject = new BehaviorSubject<number>(0);
+  productSelectedAction$ = this.productSelectedSubject.asObservable();
+
+  selectedProduct$ = combineLatest([
+    this.productsWithCategory$,
+    this.productSelectedAction$,
+  ]).pipe(
+    map(([products, selectedProductId]) =>
+      products.find((product) => product.id === selectedProductId)
+    )
+  );
+
+  selectedProductChanged(selectedProductId: number): void {
+    this.productSelectedSubject.next(selectedProductId);
+  }
+ 
+M9
+merge function - takes a set of streams and combines to single. Emits on each of the streams emits
+scan function - accumulator / fold
+
+Using both together work well with adding and editing an item.  New item is combined with current items using merge. Scan then adds or edits the new item in the list.
+ 
+
+M11
+mergeMap, concatMap, switchMap are all Higher order mapping operators. They turn Observable<Observable<T>> into Observable<T>
+
+concatMap 
+    Processes items in order.
+    Takes first item from outer observable, does function in inner observable, then outputs to the stream.  Then takes next item.  Things are done in order and it waits for it operation to be complete before taking the next.
+    
+mergeMap - aka flatmap
+    Executes inner observables in parallel and merges results
+    Output Sequence generated is not guaranteed
+
+switchMap
+    A bit like the others but when a new value in the source stream is emitted switchMap will unsubsctribe from prior inner observable
+    E.g:
+         supplierWithSwitchMap$ = of(1, 5, 8).pipe(
+            tap((id) => console.log('switchMap source Observable', id)),
+            switchMap((id) => this.http.get<Supplier>(`${this.suppliersUrl}/${id}`)));
+            
+        Here 8 is the only one emmited to the output stream a 1 begins to be processed, but is unsubsctribed because 5 becomes available etc
+    Good for Type ahead or auto completion
+    
